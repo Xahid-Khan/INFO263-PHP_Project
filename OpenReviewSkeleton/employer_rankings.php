@@ -18,7 +18,7 @@ try {
 }
 
 try {
-    $res = $open_review_s_db->query("SELECT company_name, overall_rating FROM reviewedEmployer_S WHERE employer_id = 318448");
+    $res = $open_review_s_db->query("SELECT company_name, overall_rating FROM reviewedEmployer_S");
     while($row = $res->fetch(PDO::FETCH_ASSOC)) {
         echo $row['company_name'] . " | " . $row['overall_rating'];
     }
