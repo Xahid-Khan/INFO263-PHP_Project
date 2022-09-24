@@ -5,6 +5,8 @@
     <title>Employer Rankings</title>
 </head>
 <body>
+    <!--Navigation bar-->
+    <?php include "fragments/navbar.php" ?><br>
 <h1>Employer Ratings</h1>
 <?php
 try {

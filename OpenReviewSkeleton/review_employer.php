@@ -5,6 +5,9 @@
     <title>Review Employer</title>
 </head>
 <body>
+    <!--Navigation bar-->
+    <?php include "fragments/navbar.php" ?><br>
+
 <h1>Review Employer</h1>
 <?php
 
