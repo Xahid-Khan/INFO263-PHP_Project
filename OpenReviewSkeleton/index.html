@@ -2,19 +2,23 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Home</title>
     <script src="js/script.js"></script>
-    <link rel="stylesheet" href="css/style.css" />
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <link rel="icon" href="img/search-heart.svg" />
 </head>
 <body>
-<nav>
-  <ul>
-    <li><a href="index.html">Home</a></li>
-    <li><a href="employer_rankings.php">Employer Rankings</a></li>
-    <li><a href="review_employer.php">Review an Employer</a></li>
-  </ul>
-</nav>
-<h1>OpenReview Project Skeleton</h1>
-<img src="img/E16.jpg" width="500" alt="UC E16 lecture theatre."/>
+    <!--Navigation bar-->
+    <div id="nav-placeholder"> </div><br>
+    <h1>OpenReview Project Skeleton</h1>
+    <img src="img/E16.jpg" width="500" alt="UC E16 lecture theatre."/>
 </body>
+
+<!--https://stackoverflow.com/questions/31954089/how-can-i-reuse-a-navigation-bar-on-multiple-pages-->
+<script>
+    $(function(){
+        $("#nav-placeholder").load("fragments/navbar.html");
+    });
+</script>
+
 </html>
