@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Review Employer</title>
+    <link rel="icon" href="img/search-heart.svg" />
 </head>
 <body>
     <!--Navigation bar-->
