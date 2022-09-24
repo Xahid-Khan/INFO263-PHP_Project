@@ -24,17 +24,17 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="navbar-brand" href="index.html">
+                    <a class="navbar-brand" href="index.php">
                         <button class="btn btn-sm btn-outline-light" type="button" >Home</button>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="navbar-brand" href="#">
+                    <a class="navbar-brand" href="employer_rankings.php">
                         <button class="btn btn-sm btn-outline-light" type="button">Employer Rankings</button>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="navbar-brand" href="#">
+                    <a class="navbar-brand" href="review_employer.php">
                         <button class="btn btn-sm btn-outline-light" type="button">Review an Employer</button>
                     </a>
                 </li>
