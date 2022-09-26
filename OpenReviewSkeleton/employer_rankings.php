@@ -1,8 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
     <title>Employer Rankings</title>
+    <meta charset="UTF-8">
+    <meta name="title" content="Employer Rankings">
+    <meta name="description"
+          content="A user can use this site to find the ranking of a employer or a company">
+    <meta name="keywords" content="company review, company rating, company ranking, company feedback">
     <link rel="icon" href="img/search-heart.svg" />
 </head>
 <body>
