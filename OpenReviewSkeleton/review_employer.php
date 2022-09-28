@@ -10,6 +10,30 @@
     <?php include "fragments/navbar.php" ?><br>
 
 <h1>Review Employer</h1>
+    employer - drop down menu?
+
+    summary - text box
+    advice - text box
+    pros - text box
+    conx - text box
+
+    employment status - enum
+    is current job - bool
+
+    job title - text
+    length of employement - text
+
+    RATINGS:
+
+    business outlook - enum
+    reccomend to friend - enum
+    ceo - enum
+
+    career opportunities - int
+    compensation - int
+    d&i - int
+    
+
 
     <form>
         <div class="form-group">
