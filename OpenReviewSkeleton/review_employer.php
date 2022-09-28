@@ -13,11 +13,17 @@
 <body>
     <!--Navigation bar-->
     <?php include "fragments/navbar.php" ?><br>
+    <?php include "search_employers.php" ?>
 
 <h1>Review Employer</h1>
-<?php
 
-?>
+<form method="post">
+    <label>Search</label>
+    <input type="text" name="search">
+    <input type="submit" name="submit_search">
+    
+</form>
+
 </body>
 </html>
 
