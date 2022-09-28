@@ -8,37 +8,31 @@ try {
     die($e->getMessage());
 }
 
-if (isset($_POST["submit_search"])) {
+if (isset($_POST["query"])) {
 
-	$qurry = $_POST["search"];
-	$sql = $open_review_s_db->prepare("SELECT * FROM Employers WHERE name = '$qurry'");
+	//$results = array();
 
-	$sql->setFetchMode(PDO::FETCH_OBJ);
-	$sql->execute();
+	$query = preg_replace('/[^A-Za-z0-9/- ]/', '', $_POST["query"]);
 
-	if($row = $sql->fetch())
-	{
-		?>
-		<br><br><br>
-		<table>
-			<tr>
-				<th>Name</th>
-				<th>Description</th>
-			</tr>
-			<tr>
-				<td><?php echo $row->Name; ?></td>
-				<td><?php echo $row->Description;?></td>
-			</tr>
+	$sql = $open_review_s_db->prepare("SELECT * FROM employer WHERE company_name LIKE '%" . $query . "%' LIMIT 10");
 
-		</table>
-<?php 
+	$result = $open_review_s_db->execute($sql);
+
+	$replace_string = "<b>" . $query . "</b>";
+
+	foreach($result as $row) {
+
+		$data[] = array(
+
+			'post_title' => str_ireplace($query, $replace_string, $row["company_name"])
+
+		);
+
 	}
-		
-		
-		else{
-			echo "Name Does not exist";
-		}
 
 
+	echo json_encode($data);
 
 }
+
+?>
