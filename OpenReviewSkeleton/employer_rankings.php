@@ -8,6 +8,7 @@
           content="A user can use this site to find the ranking of a employer or a company">
     <meta name="keywords" content="company review, company rating, company ranking, company feedback">
     <link rel="icon" href="img/search-heart.svg" />
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <!--Navigation bar-->
@@ -30,6 +31,8 @@ try {
     die($e->getMessage());
 }
 ?>
+
+
 </body>
 </html>
 
