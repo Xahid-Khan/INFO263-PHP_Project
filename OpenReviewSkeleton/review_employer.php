@@ -27,12 +27,12 @@
                 <div class="col-md-4">
                     <label for="overallRating">Overall Rating</label> <!--not required-->
                     <select class="form-control" id="overallRating" name="overallRating">
-                        <option>Select...</option>
+                        <option value="0">Select...</option>
                         <option value="1">1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
                     </select>
                 </div>
             </div>
@@ -45,7 +45,7 @@
                 <div class="col-md-4">
                     <label for="employmentStatus">Employment Status</label> <!--not required-->
                     <select class="form-control" id="employmentStatus">
-                        <option>Select...</option>
+                        <option value = "0">Select...</option>
                         <option>Regular</option>
                         <option>Part Time</option>
                         <option>Contract</option>
@@ -59,7 +59,7 @@
                 <div class="col-md-4">
                     <label for="currentJob">Is this your current job?</label>
                     <select class="form-control" id="currentJob">
-                        <option>Select...</option>
+                        <option value = "0">Select...</option>
                         <option>Yes</option>
                         <option>No</option>
                     </select>
