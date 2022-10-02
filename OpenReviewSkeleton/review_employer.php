@@ -16,27 +16,19 @@
 
     <div class="container">
         <h1>Review Employer</h1>
-        <form>
+        <form action="employer_review_form_submission.php" method="post">
             <br>
             <h4>Employment Details:</h4>
-            <!-- employment status, is_current_job, job_title, length_of_employment
-
-            /employer
-            /employment status - enum
-            is current job?
-            job title
-            length of employment in years???
-            -->
             <div class="row">
                 <div class="col-md-8">
                     <label for="employer">Employer (temp)</label>
-                    <input type="text" class="form-control" placeholder="e.g. Google">
+                    <input type="text" id="employer" name="employer" class="form-control" placeholder="e.g. Google">
                 </div>
                 <div class="col-md-4">
                     <label for="overallRating">Overall Rating</label> <!--not required-->
-                    <select class="form-control" id="overallRating">
-                        <option>Select</option>
-                        <option>1</option>
+                    <select class="form-control" id="overallRating" name="overallRating">
+                        <option>Select...</option>
+                        <option value="1">1</option>
                         <option>2</option>
                         <option>3</option>
                         <option>4</option>
@@ -53,7 +45,7 @@
                 <div class="col-md-4">
                     <label for="employmentStatus">Employment Status</label> <!--not required-->
                     <select class="form-control" id="employmentStatus">
-                        <option>Select</option>
+                        <option>Select...</option>
                         <option>Regular</option>
                         <option>Part Time</option>
                         <option>Contract</option>
@@ -67,6 +59,7 @@
                 <div class="col-md-4">
                     <label for="currentJob">Is this your current job?</label>
                     <select class="form-control" id="currentJob">
+                        <option>Select...</option>
                         <option>Yes</option>
                         <option>No</option>
                     </select>
@@ -136,7 +129,6 @@
                 </div>
             </div>
             <br>
-
             <div class="row">
                 <div class="col-md-4">
                     <label for="careerOpportunities">Rating of Career Opportunities</label> <!--not required-->
@@ -173,7 +165,6 @@
                 </div>
             </div>
             <br>
-
             <div class="row">
                 <div class="col-md-4">
                     <label for="diversity">Rating of Diversity and Inclusion</label> <!--not required-->
@@ -213,7 +204,7 @@
             <div class="row">
                 <div class="col">
                     <div class="text-end">
-                        <button type="button" class="btn btn-primary">Submit Review</button>
+                        <button type="submit" class="btn btn-primary">Submit Review</button>
                     </div>
                 </div>
             </div>
