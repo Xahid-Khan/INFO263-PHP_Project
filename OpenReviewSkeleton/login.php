@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
-    <script src="js/register_user.js"></script>
     <link rel="icon" href="img/search-heart.svg"/>
     <link rel="stylesheet" href="css/register_user.css">
 </head>
@@ -18,7 +17,8 @@
             <div class="card-block-login" style="display: grid; justify-content: center; text-align-last: center;">
                 <h1>Welcome to RATER</h1>
                 <p>Where you can rate any employer and leave reviews</p>
-                <form style="text-align-last: left;" action="login.php" method="get">
+                <form style="text-align-last: left; height: 80%" onsubmit="return validateLoginForm()"
+                      action="login_validation.php" method="post">
                     <table class="registration-table">
                         <tr class="registration-row">
                             <td style="margin: 20px; width: 50vh">
@@ -28,19 +28,28 @@
                         </tr>
                         <tr class="registration-row">
                             <td style="margin: 20px; width: 50vh">
-                                <input id="password" class="form-control form-control-lg" type="text"
+                                <input id="password" class="form-control form-control-lg" type="password"
                                        placeholder="Enter password" name="password">
                             </td>
                         </tr>
+
                         <tr>
                             <td>
-                                <span id="error-message" class="form-error"></span>
+                                <h5 id="error-message" class="form-error">
+                                    <?php
+                                    if (!empty($_GET['message'])) {
+                                        $error = $_GET['message'];
+                                        echo $error;
+                                    }
+                                    ?>
+                                </h5>
                             </td>
                         </tr>
                     </table>
                     <div style="float: right; width: 50vh">
-                        <button type="submit" class="btn btn-primary" style="width: 50vh; text-align-last: center"
-                        >REGISTER
+                        <button type="submit" class="btn btn-primary"
+                                style="width: 50vh; text-align-last: center; cursor: pointer">
+                            Login
                         </button>
                     </div>
                 </form>
@@ -59,31 +68,6 @@
     </div>
 </div>
 
-
-<?php
-try {
-    $open_review_s_db = new PDO("sqlite:open_review_s_sqlite.db");
-    $open_review_s_db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-
-    if (isset($_POST['email']) && isset($_POST['password'])) {
-        if (login_user(htmlentities($_POST["username"]), $_POST["password"])) {
-            //TODO
-        } else {
-
-        }
-    }
-
-    if (authenticate(htmlentities($_POST["username"]), $_POST["password"])) {
-        //TODO
-    }
-
-} catch (PDOException $e) {
-    die($e->getMessage());
-}
-
-?>
-
 </body>
-
+<script src="js/login_user.js"></script>
 </html>

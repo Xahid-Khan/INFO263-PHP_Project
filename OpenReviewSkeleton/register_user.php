@@ -18,46 +18,53 @@
                 <h1>Welcome to RATER</h1>
                 <p>Where you can rate any employer and leave reviews</p>
                 <h1>Registration Form</h1>
-                <form style="text-align-last: left; height: 400px" action="registrationProcess.php" method="post">
+                <form style="text-align-last: left; height: 400px" onsubmit="return validateForm()" action="registration.php" method="post">
                     <table class="registration-table">
                         <tr>
                             <td>
-                                <h5 id="error-message" class="form-error"></h5>
+                                <h5 id="error-message" class="form-error">
+                                    <?php
+                                    if (!empty($_GET['message'])) {
+                                        $error = $_GET['message'];
+                                        echo $error;
+                                    }
+                                    ?>
+                                </h5>
                             </td>
                         </tr>
                         <tr class="registration-row">
                             <td style="margin: 20px; width: 50vh">
-                                <input id="first-name" class="form-control form-control-lg" type="text"
-                                       placeholder="First Name" name="firstName" required>
+                                <input id="first-name" class="form-control form-control-lg" type="text" maxlength="20"
+                                       minlength="1" placeholder="First Name" name="firstName" required>
                             </td>
                         </tr>
                         <tr class="registration-row">
                             <td style="margin: 20px; width: 50vh">
-                                <input id="last-name" class="form-control form-control-lg" type="text"
-                                       placeholder="Last Name" name="lastName" required>
+                                <input id="last-name" class="form-control form-control-lg" type="text" maxlength="20"
+                                       minlength="1" placeholder="Last Name" name="lastName" required>
                             </td>
                         </tr>
                         <tr class="registration-row">
                             <td style="margin: 20px; width: 50vh">
-                                <input id="user-email" class="form-control form-control-lg" type="email"
-                                       placeholder="Enter Email" name="email" required>
+                                <input id="user-email" class="form-control form-control-lg" type="email" maxlength="20"
+                                       minlength="1" placeholder="Enter Email" name="email" required>
                             </td>
                         </tr>
                         <tr class="registration-row">
                             <td style="margin: 20px; width: 50vh">
-                                <input id="user-password" class="form-control form-control-lg" type="password"
-                                       placeholder="Enter Password" name="password" required>
+                                <input id="user-password" class="form-control form-control-lg" type="password" maxlength="20"
+                                       minlength="1" placeholder="Enter Password" name="password" required>
                             </td>
                         </tr>
                         <tr class="registration-row">
                             <td style="margin: 20px; width: 50vh">
-                                <input id="match-password" class="form-control form-control-lg" type="password"
-                                       placeholder="Re-enter Password" name="matchPassword" required>
+                                <input id="match-password" class="form-control form-control-lg" type="password"  maxlength="20"
+                                       minlength="1" placeholder="Re-enter Password" name="matchPassword" required>
                             </td>
                         </tr>
                     </table>
                     <div style="float: right; width: 50vh">
-                        <button id="registration-button" type="button" class="btn btn-primary" style="width: 50vh; text-align-last: center"
+                        <button id="registration-button" type="submit" class="btn btn-primary" style="width: 50vh; text-align-last: center"
                         >REGISTER
                         </button>
                         <button id="registration-submit" type="submit" style="display: none"/>
