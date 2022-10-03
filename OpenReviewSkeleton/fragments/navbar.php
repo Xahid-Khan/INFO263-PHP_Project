@@ -40,6 +40,15 @@
                 </li>
             </ul>
         </div>
+        <div style="float: left;">
+            <ul class="navbar-nav mr-auto" style="float: right">
+                <li class="nav-item">
+                    <a class="navbar-brand" href="login.php">
+                        <button class="btn btn-sm btn-outline-light" type="button" >Login</button>
+                    </a>
+                </li>
+            </ul>
+        </div>
     </nav>
 
 </body>

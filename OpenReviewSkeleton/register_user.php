@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Registration</title>
-    <script src="js/register_user.js"></script>
-    <link rel="icon" href="img/search-heart.svg" />
+    <link rel="icon" href="img/search-heart.svg"/>
     <link rel="stylesheet" href="css/register_user.css">
 </head>
 <body>
 <!--Navigation bar-->
 <?php include "fragments/navbar.php" ?><br>
+
+<!--Registration Form -->
 <div class="registration-body">
     <div class="registration-card">
         <div style="width: 100%">
@@ -17,49 +18,69 @@
                 <h1>Welcome to RATER</h1>
                 <p>Where you can rate any employer and leave reviews</p>
                 <h1>Registration Form</h1>
-                <form style="text-align-last: left; height: 400px">
+                <form style="text-align-last: left; height: 400px" action="registrationProcess.php" method="post">
                     <table class="registration-table">
-                        <tr class="registration-row">
-                            <td style="margin: 20px; width: 50vh">
-                                <input class="form-control form-control-lg" type="text" placeholder="First Name">
+                        <tr>
+                            <td>
+                                <h5 id="error-message" class="form-error"></h5>
                             </td>
                         </tr>
                         <tr class="registration-row">
                             <td style="margin: 20px; width: 50vh">
-                                <input class="form-control form-control-lg" type="text" placeholder="Last Name">
+                                <input id="first-name" class="form-control form-control-lg" type="text"
+                                       placeholder="First Name" name="firstName" required>
                             </td>
                         </tr>
                         <tr class="registration-row">
                             <td style="margin: 20px; width: 50vh">
-                                <input class="form-control form-control-lg" type="email" placeholder="Enter Email">
+                                <input id="last-name" class="form-control form-control-lg" type="text"
+                                       placeholder="Last Name" name="lastName" required>
                             </td>
                         </tr>
                         <tr class="registration-row">
                             <td style="margin: 20px; width: 50vh">
-                                <input class="form-control form-control-lg" type="password" placeholder="Enter Password">
+                                <input id="user-email" class="form-control form-control-lg" type="email"
+                                       placeholder="Enter Email" name="email" required>
                             </td>
                         </tr>
                         <tr class="registration-row">
                             <td style="margin: 20px; width: 50vh">
-                                <input class="form-control form-control-lg" type="password" placeholder="Re-enter Password">
+                                <input id="user-password" class="form-control form-control-lg" type="password"
+                                       placeholder="Enter Password" name="password" required>
+                            </td>
+                        </tr>
+                        <tr class="registration-row">
+                            <td style="margin: 20px; width: 50vh">
+                                <input id="match-password" class="form-control form-control-lg" type="password"
+                                       placeholder="Re-enter Password" name="matchPassword" required>
                             </td>
                         </tr>
                     </table>
                     <div style="float: right; width: 50vh">
-                        <button type="submit" class="btn btn-primary" style="width: 50vh; text-align-last: center"
-                        >REGISTER</button>
+                        <button id="registration-button" type="button" class="btn btn-primary" style="width: 50vh; text-align-last: center"
+                        >REGISTER
+                        </button>
+                        <button id="registration-submit" type="submit" style="display: none"/>
                     </div>
                 </form>
                 <div>
-                    <p class="login-link">
-                        If you've already registered, click here to login.
-                    </p>
+                    <div style="float: left;padding-left: 5vh;">
+                        <span>If you have an account, to login&nbsp;</span>
+                    </div>
+                    <div style="float: left;">
+                        <a class="click-here-link" href="login.php"> click here </a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
+<?php
+
+?>
+
 </body>
+<script src="js/register_user.js"></script>
 
 </html>
