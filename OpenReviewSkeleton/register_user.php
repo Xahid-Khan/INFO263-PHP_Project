@@ -15,10 +15,13 @@
     <div class="registration-card">
         <div style="width: 100%">
             <div class="card-block" style="display: grid; justify-content: center; text-align-last: center;">
-                <h1>Welcome to RATER</h1>
-                <p>Where you can rate any employer and leave reviews</p>
-                <h1>Registration Form</h1>
-                <form style="text-align-last: left; height: 400px" onsubmit="return validateForm()" action="registration.php" method="post">
+                <div>
+                    <h1>Welcome to RATER</h1>
+                    <p>Where you can rate any employer and leave reviews</p>
+                    <h1>Registration Form</h1>
+                </div>
+                <form style="text-align-last: left; height: 400px; margin-bottom: 50px;"
+                      onsubmit="return validateForm()" action="validations/registration.php" method="post">
                     <table class="registration-table">
                         <tr>
                             <td>
@@ -67,7 +70,6 @@
                         <button id="registration-button" type="submit" class="btn btn-primary" style="width: 50vh; text-align-last: center"
                         >REGISTER
                         </button>
-                        <button id="registration-submit" type="submit" style="display: none"/>
                     </div>
                 </form>
                 <div>

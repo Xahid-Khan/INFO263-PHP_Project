@@ -10,15 +10,24 @@
 <!--Navigation bar-->
 <?php include "fragments/navbar.php" ?><br>
 
+<?php
+if(isset($_SESSION['user_id'])){
+    header('Location: index.php');
+    exit;
+}
+?>
+
 <!--Login Form -->
 <div class="login-body">
     <div class="registration-card">
         <div style="width: 100%">
             <div class="card-block-login" style="display: grid; justify-content: center; text-align-last: center;">
-                <h1>Welcome to RATER</h1>
-                <p>Where you can rate any employer and leave reviews</p>
+                <div>
+                    <h1>Welcome to RATER</h1>
+                    <p>Where you can rate any employer and leave reviews</p>
+                </div>
                 <form style="text-align-last: left; height: 80%" onsubmit="return validateLoginForm()"
-                      action="login_validation.php" method="post">
+                      action="validations/login_validation.php" method="post">
                     <table class="registration-table">
                         <tr class="registration-row">
                             <td style="margin: 20px; width: 50vh">
