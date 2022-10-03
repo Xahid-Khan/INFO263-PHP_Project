@@ -10,6 +10,31 @@
 
     <link rel="icon" href="img/search-heart.svg" />
     <link rel="stylesheet" href="css/style.css">
+
+
+    <style>
+
+
+        .list-group {
+          display: none;
+          position: absolute;
+          background-color: #f1f1f1;
+          min-width: 160px;
+          box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+          z-index: 1;
+        }
+        
+        /* Links inside the dropdown */
+        .list-group a {
+          color: black;
+          padding: 12px 16px;
+          text-decoration: none;
+          display: block;
+        }
+
+
+    </style>
+
 </head>
 <body>
     <!--Navigation bar-->
@@ -21,7 +46,8 @@
 <!--    https://dcodemania.com/post/autocomplete-search-php-pdo-mysql-ajax-->
     <form action="search.php" method="POST">
         <input type="text" name="query" id="search" />
-        <input type="submit" value="Search" />
+        
+        <div class="list-group" id="show-list">
     </form>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
@@ -37,18 +63,44 @@
                             query: searchText,
                         },
                         success: function (response) {
-                            console.log(response)
+
+                            $("#show-list").html(response);
+
                         },
                     });
                 } else {
-                    console("failed")
+                    $("#show-list").html(response);
                 }
             });
-            // // Set searched text in input field on click of search button
-            // $(document).on("click", "a", function () {
-            //     $("#search").val($(this).text());
-            //     $("#show-list").html("");
-            // });
+
+            $(document).on("click", "a", function () {
+
+                console.log(this);
+
+                $("#search").val($(this).text());
+                $("#show-list").html("");
+                $('#list').show();
+
+                let found = $(this).text();
+
+                $.ajax({
+
+                    url: "search.php",
+                    method: "post",
+                    data: {
+                        result_clicked: found,
+                    },
+                    success: function(response) {
+
+                        console.log(response);
+
+                    }
+
+                });
+
+
+            });
+
         });
     </script>
 

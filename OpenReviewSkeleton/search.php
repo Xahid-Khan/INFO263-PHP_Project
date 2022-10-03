@@ -10,16 +10,33 @@
         if (isset($_POST['query'])) {
             $inpText = $_POST['query'] ;
 
-            $res = $open_review_s_db->query("SELECT * FROM employer WHERE company_name LIKE '%$inpText%' LIMIT 5");
+            // remove characters which can cause sql injection
+            $cleaned = preg_replace("/[^A-Za-z0-9 ]/", "", $inpText);
+
+            $res = $open_review_s_db->query("SELECT * FROM employer WHERE company_name LIKE '%$cleaned%' LIMIT 5");
 
 
             if ($res) {
                 foreach ($res as $row) {
-                    echo '<a>' . $row['company_name'] . '</a>';
+                    echo '<a href="#">' . $row['company_name'] . '</option>';
                 }
             } else {
                 echo '<p>No Record</p>';
             }
+        }
+
+        if (isset($_POST['result_clicked'])) {
+
+            $result = $_POST["result_clicked"];
+
+            // this sql query doesn't seem to be right.
+            // $res = $open_review_s_db->query("SELECT * from employer WHERE company_name = '%$result%'");
+
+            echo $result;
+
+
+            
+
         }
 
     } catch (PDOException $e) {
