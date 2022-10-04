@@ -25,13 +25,18 @@
         }
         
         /* Links inside the dropdown */
-        .list-group a {
+        .list-group p {
           color: black;
           padding: 12px 16px;
           text-decoration: none;
           display: block;
         }
 
+        .list-group p:hover {
+
+            color: blue;
+
+        }
 
     </style>
 
@@ -51,6 +56,7 @@
     </form>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
+
         $(document).ready(function () {
             // Send Search Text to the server
             $("#search").keyup(function () {
@@ -73,13 +79,12 @@
                 }
             });
 
-            $(document).on("click", "li", function () {
+            $(document).on("click", "p", function () {
 
                 console.log(this);
 
                 $("#search").val($(this).text());
                 $("#show-list").html("");
-                $('#list').show();
 
                 let found = $(this).text();
 
