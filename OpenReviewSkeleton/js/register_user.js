@@ -13,36 +13,44 @@ const NAMEREGEX = /^[a-zA-Z ]*$/;
 const validateForm = () => {
     if (firstName.value.length === 0 || firstName.value.length > 20) {
         errorMessage.innerText = "First name must be between 1 and 20 characters";
+        errorMessage.style.display = "flex";
         return false;
     }
     if (!firstName.value.match(NAMEREGEX)) {
         errorMessage.innerText = "First name can only alphabetical characters";
+        errorMessage.style.display = "flex";
         return false;
     }
 
     if (lastName.value.length === 0 || lastName.value.length > 20) {
         errorMessage.innerText = "Last name must be between 1 and 20 characters";
+        errorMessage.style.display = "flex";
         return false;
     }
     if (!lastName.value.match(NAMEREGEX)) {
         errorMessage.innerText = "Last name can only alphabetical characters";
+        errorMessage.style.display = "flex";
         return false;
     }
 
     if (!(email.value.length > 0 && email.value.split("@").length > 1)) {
         errorMessage.innerText = "Please enter a valid email";
+        errorMessage.style.display = "flex";
         return false;
     }
 
     if (password.value.length < 6 || password.value.length > 15) {
         errorMessage.innerText = "A password must be between 6 and 15 characters";
+        errorMessage.style.display = "flex";
         return false;
     }
 
     if (!matchPassword.value.match(password.value)) {
         errorMessage.innerText = "Password does not match";
+        errorMessage.style.display = "flex";
         return false;
     }
     errorMessage.innerText = "";
+    errorMessage.style.display = "none";
     return true;
 }

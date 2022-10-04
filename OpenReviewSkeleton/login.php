@@ -5,6 +5,7 @@
     <title>Login</title>
     <link rel="icon" href="img/search-heart.svg"/>
     <link rel="stylesheet" href="css/register_user.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <!--Navigation bar-->
@@ -20,8 +21,8 @@ if(isset($_SESSION['user_id'])){
 <!--Login Form -->
 <div class="login-body">
     <div class="registration-card">
-        <div style="width: 100%">
-            <div class="card-block-login" style="display: grid; justify-content: center; text-align-last: center;">
+        <div style="width: 100%; justify-content: center; display: flex;">
+            <div class="card-block-login">
                 <div>
                     <h1>Welcome to RATER</h1>
                     <p>Where you can rate any employer and leave reviews</p>
@@ -29,6 +30,24 @@ if(isset($_SESSION['user_id'])){
                 <form style="text-align-last: left; height: 80%" onsubmit="return validateLoginForm()"
                       action="validations/login_validation.php" method="post">
                     <table class="registration-table">
+                        <tr>
+                            <td>
+                                <h5 id="error-message" class="form-error" style="display: <?php
+                                if (!empty($_GET['message'])) {
+                                    echo 'flex';
+                                } else {
+                                    echo 'none';
+                                }
+                                ?>">
+                                    <?php
+                                    if (!empty($_GET['message'])) {
+                                        $error = $_GET['message'];
+                                        echo $error;
+                                    }
+                                    ?>
+                                </h5>
+                            </td>
+                        </tr>
                         <tr class="registration-row">
                             <td style="margin: 20px; width: 50vh">
                                 <input id="user-email" class="form-control form-control-lg" type="email"
@@ -41,21 +60,8 @@ if(isset($_SESSION['user_id'])){
                                        placeholder="Enter password*" name="password" required>
                             </td>
                         </tr>
-
-                        <tr>
-                            <td>
-                                <h5 id="error-message" class="form-error">
-                                    <?php
-                                    if (!empty($_GET['message'])) {
-                                        $error = $_GET['message'];
-                                        echo $error;
-                                    }
-                                    ?>
-                                </h5>
-                            </td>
-                        </tr>
                     </table>
-                    <div style="float: right; width: 50vh">
+                    <div style="float: right; width: 100%; padding: 12px 0 0 0;">
                         <button type="submit" class="btn btn-primary"
                                 style="width: 50vh; text-align-last: center; cursor: pointer">
                             Login
@@ -64,8 +70,8 @@ if(isset($_SESSION['user_id'])){
                 </form>
                 <br/>
                 <br/>
-                <div>
-                    <div style="float: left;padding-left: 5vh;">
+                <div class="bottom-link">
+                    <div style="float: left;">
                         <span>If you do not have an account, to register&nbsp;</span>
                     </div>
                     <div style="float: left;">
@@ -76,7 +82,7 @@ if(isset($_SESSION['user_id'])){
         </div>
     </div>
 </div>
-
+<?php include "fragments/footer.php" ?><br>
 </body>
 <script src="js/login_user.js"></script>
 </html>

@@ -5,6 +5,7 @@
     <title>Registration</title>
     <link rel="icon" href="img/search-heart.svg"/>
     <link rel="stylesheet" href="css/register_user.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <!--Navigation bar-->
@@ -13,7 +14,7 @@
 <!--Registration Form -->
 <div class="registration-body">
     <div class="registration-card">
-        <div style="width: 100%">
+        <div style="width: 100%; display: flex; justify-content: center;">
             <div class="card-block" style="display: grid; justify-content: center; text-align-last: center;">
                 <div>
                     <h1>Welcome to RATER</h1>
@@ -25,7 +26,13 @@
                     <table class="registration-table">
                         <tr>
                             <td>
-                                <h5 id="error-message" class="form-error">
+                                <h5 id="error-message" class="form-error" style="display: <?php
+                                if (!empty($_GET['message'])) {
+                                    echo 'flex';
+                                } else {
+                                    echo 'none';
+                                }
+                                ?>">
                                     <?php
                                     if (!empty($_GET['message'])) {
                                         $error = $_GET['message'];
@@ -66,14 +73,14 @@
                             </td>
                         </tr>
                     </table>
-                    <div style="float: right; width: 50vh">
+                    <div style="float: right; width: 100%; padding: 12px 0 0 0;">
                         <button id="registration-button" type="submit" class="btn btn-primary" style="width: 50vh; text-align-last: center"
                         >REGISTER
                         </button>
                     </div>
                 </form>
-                <div>
-                    <div style="float: left;padding-left: 5vh;">
+                <div class="bottom-link">
+                    <div style="float: left;">
                         <span>If you have an account, to login&nbsp;</span>
                     </div>
                     <div style="float: left;">
@@ -84,11 +91,7 @@
         </div>
     </div>
 </div>
-
-<?php
-
-?>
-
+<?php include "fragments/footer.php" ?>
 </body>
 <script src="js/register_user.js"></script>
 

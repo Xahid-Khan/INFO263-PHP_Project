@@ -5,12 +5,12 @@ h1{
 
 .registration-body {
     padding: 0 20% 0 20%;
-    height: 90vh;
+    height: fit-content;
 }
 
 .login-body {
     padding: 4% 20% 0 20%;
-    height: 90vh;
+    height: fit-content;
 }
 
 .registration-card {
@@ -28,8 +28,6 @@ h1{
     position: relative;
     display: flex;
     flex-direction: column;
-    min-width: 0;
-    height: 90vh;
     word-wrap: break-word;
     background-color: var(--bs-card-bg);
     background-clip: border-box;
@@ -38,23 +36,39 @@ h1{
 
 .card-block{
     height:  80vh;
-    background-color: #96C7D5;
+    display: grid;
+    justify-content: center;
+    text-align-last: center;
+    background-color: black;
+    color: white;
+    width: fit-content;
+    padding-left: 15px;
+    padding-right: 15px;
     border: none;
     background-position: center;
     background-size: cover;
     transition: all 0.2s ease-in-out !important;
-    border-radius: 24px;
+    border-radius: 10px;
+    opacity: 0.9;
 }
 
 .card-block-login{
     height:  60vh;
     padding-top: 8%;
-    background-color: #96C7D5;
+    display: grid;
+    justify-content: center;
+    text-align-last: center;
+    background-color: black;
+    color: white;
+    width: fit-content;
+    padding-left: 15px;
+    padding-right: 15px;
     border: none;
     background-position: center;
     background-size: cover;
     transition: all 0.2s ease-in-out !important;
-    border-radius: 24px;
+    border-radius: 10px;
+    opacity: 0.9;
 }
 
 .registration-table {
@@ -80,10 +94,21 @@ tr.row {
 }
 
 .form-error {
-    color: red;
-    text-emphasis-color: black;
+    background: red;
+    display: flex;
+    justify-content: center;
+    display: none;
+    color: white;
+    margin: 0 -15px 10px -15px;
+    height: 28px;
+    padding: 0;
 }
 
 .click-here-link {
     float: left;
+}
+
+.bottom-link {
+    display: flex;
+    justify-content: center;
 }
