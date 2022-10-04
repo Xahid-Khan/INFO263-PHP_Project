@@ -9,6 +9,7 @@
     <meta name="keywords" content="company review, company rating, company ranking, company feedback">
 
     <link rel="icon" href="img/search-heart.svg" />
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <!--Navigation bar-->
@@ -20,9 +21,8 @@
     }
     ?>
 <h1>Review Employer</h1>
-<?php
 
-?>
+
 </body>
 </html>
 
