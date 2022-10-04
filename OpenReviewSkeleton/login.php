@@ -32,13 +32,13 @@ if(isset($_SESSION['user_id'])){
                         <tr class="registration-row">
                             <td style="margin: 20px; width: 50vh">
                                 <input id="user-email" class="form-control form-control-lg" type="email"
-                                       placeholder="Enter email" name="user-email">
+                                       placeholder="Enter email*" name="user-email" required>
                             </td>
                         </tr>
                         <tr class="registration-row">
                             <td style="margin: 20px; width: 50vh">
                                 <input id="password" class="form-control form-control-lg" type="password"
-                                       placeholder="Enter password" name="password">
+                                       placeholder="Enter password*" name="password" required>
                             </td>
                         </tr>
 

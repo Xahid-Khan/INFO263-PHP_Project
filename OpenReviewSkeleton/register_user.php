@@ -38,31 +38,31 @@
                         <tr class="registration-row">
                             <td style="margin: 20px; width: 50vh">
                                 <input id="first-name" class="form-control form-control-lg" type="text" maxlength="20"
-                                       minlength="1" placeholder="First Name" name="firstName" required>
+                                       minlength="1" placeholder="First Name*" name="firstName" required>
                             </td>
                         </tr>
                         <tr class="registration-row">
                             <td style="margin: 20px; width: 50vh">
                                 <input id="last-name" class="form-control form-control-lg" type="text" maxlength="20"
-                                       minlength="1" placeholder="Last Name" name="lastName" required>
+                                       minlength="1" placeholder="Last Name*" name="lastName" required>
                             </td>
                         </tr>
                         <tr class="registration-row">
                             <td style="margin: 20px; width: 50vh">
                                 <input id="user-email" class="form-control form-control-lg" type="email" maxlength="20"
-                                       minlength="1" placeholder="Enter Email" name="email" required>
+                                       minlength="1" placeholder="Enter Email*" name="email" required>
                             </td>
                         </tr>
                         <tr class="registration-row">
                             <td style="margin: 20px; width: 50vh">
                                 <input id="user-password" class="form-control form-control-lg" type="password" maxlength="20"
-                                       minlength="1" placeholder="Enter Password" name="password" required>
+                                       minlength="1" placeholder="Enter Password*" name="password" required>
                             </td>
                         </tr>
                         <tr class="registration-row">
                             <td style="margin: 20px; width: 50vh">
                                 <input id="match-password" class="form-control form-control-lg" type="password"  maxlength="20"
-                                       minlength="1" placeholder="Re-enter Password" name="matchPassword" required>
+                                       minlength="1" placeholder="Re-enter Password*" name="matchPassword" required>
                             </td>
                         </tr>
                     </table>
