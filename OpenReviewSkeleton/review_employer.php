@@ -73,7 +73,7 @@
                 }
             });
 
-            $(document).on("click", "a", function () {
+            $(document).on("click", "li", function () {
 
                 console.log(this);
 
