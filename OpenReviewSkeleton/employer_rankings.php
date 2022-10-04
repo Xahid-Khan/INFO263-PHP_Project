@@ -37,7 +37,7 @@
                 }
 
                 try {
-                    $open_review_s_db = new PDO("sqlite:open_review_s_sqlite.db");
+                    $open_review_s_db = new PDO("sqlite:validations/open_review_s_sqlite.db");
                     $open_review_s_db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 } catch (PDOException $e) {
                     die($e->getMessage());

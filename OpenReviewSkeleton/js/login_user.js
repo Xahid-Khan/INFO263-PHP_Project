@@ -19,6 +19,6 @@ const validateLoginForm = () => {
     }
 
     errorMessage.innerText = "";
-    errorMessage.style.display = 'flex';
+    errorMessage.style.display = 'none';
     return true;
 }

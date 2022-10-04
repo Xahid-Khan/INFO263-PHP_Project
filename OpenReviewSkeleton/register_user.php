@@ -45,31 +45,36 @@
                         <tr class="registration-row">
                             <td style="margin: 20px; width: 50vh">
                                 <input id="first-name" class="form-control form-control-lg" type="text" maxlength="20"
-                                       minlength="1" placeholder="First Name*" name="firstName" required>
+                                       minlength="1" placeholder="First Name*" name="firstName" required
+                                       onchange="validateFirstName()">
                             </td>
                         </tr>
                         <tr class="registration-row">
                             <td style="margin: 20px; width: 50vh">
                                 <input id="last-name" class="form-control form-control-lg" type="text" maxlength="20"
-                                       minlength="1" placeholder="Last Name*" name="lastName" required>
+                                       minlength="1" placeholder="Last Name*" name="lastName" required
+                                       onchange="validateLastName()">
                             </td>
                         </tr>
                         <tr class="registration-row">
                             <td style="margin: 20px; width: 50vh">
                                 <input id="user-email" class="form-control form-control-lg" type="email" maxlength="20"
-                                       minlength="1" placeholder="Enter Email*" name="email" required>
+                                       minlength="1" placeholder="Enter Email*" name="email" required
+                                       onchange="validateEmail()">
                             </td>
                         </tr>
                         <tr class="registration-row">
                             <td style="margin: 20px; width: 50vh">
                                 <input id="user-password" class="form-control form-control-lg" type="password" maxlength="20"
-                                       minlength="1" placeholder="Enter Password*" name="password" required>
+                                       minlength="1" placeholder="Enter Password*" name="password" required
+                                       onchange="validatePassword()">
                             </td>
                         </tr>
                         <tr class="registration-row">
                             <td style="margin: 20px; width: 50vh">
                                 <input id="match-password" class="form-control form-control-lg" type="password"  maxlength="20"
-                                       minlength="1" placeholder="Re-enter Password*" name="matchPassword" required>
+                                       minlength="1" placeholder="Re-enter Password*" name="matchPassword" required
+                                       onchange="validateMatchPassword()">
                             </td>
                         </tr>
                     </table>
