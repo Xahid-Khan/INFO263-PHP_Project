@@ -18,7 +18,7 @@
 
             if ($res) {
                 foreach ($res as $row) {
-                    echo '<p class="selectitem">' . $row['company_name'] . '</p>';
+                    echo '<a class="selectitem">' . $row['company_name'] . '</a>';
                 }
             } else {
                 echo '<p>No Record</p>';
