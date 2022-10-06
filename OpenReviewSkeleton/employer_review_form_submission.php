@@ -42,7 +42,7 @@ function insertReview($review){
 
     try {
         $stmt = $open_review_s_db->prepare($query);
-
+        //TODO: add ability for employer to be added/integrate with the predictive text code
         $stmt->bindParam(':advice', $review->advice);
         $stmt->bindParam(':cons', $review->cons);
         $stmt->bindParam(':employmentStatus', $review->employmentStatus);
@@ -115,6 +115,12 @@ if (isset($_POST['employer'])) {
     } elseif ($overallRating == 0) {
         echo "Review not submitted: Please provide an overall rating for $employer";
     } else {
+        // debugging
+        echo "we are about to submit your review";
+        echo "$employer";
+
+        // the review is not being created for some reason, every step after this is not being reached
+        // how do we include the review class in this php file??
         $review = new Review($employer, $overallRating,
             $jobTitle, $employmentStatus,
             $currentJob, $jobEndingYear, $yearsEmployed,
@@ -122,7 +128,14 @@ if (isset($_POST['employer'])) {
             $businessOutlook, $recommendToFriend, $ceoRating,
             $careerOpportunities, $compensation, $culture,
             $diversity, $seniorLeadership, $workLifeBalance);
+
+        echo "$review->employer";
+
+        echo "your review has been created";
+
         insertReview($review);
+
+        // should input validation be done here?
         echo "Success! Your review has been submitted for $employer";
     }
 }

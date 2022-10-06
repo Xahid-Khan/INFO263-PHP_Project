@@ -2,7 +2,7 @@
 
 class Review
 {
-    protected $employer;
+    public $employer;
     protected $overallRating;
     protected $jobTitle;
     protected $employmentStatus;
