@@ -13,7 +13,6 @@
     <!--Navigation bar-->
     <?php include "fragments/navbar.php" ?><br>
 
-
     <div class="container">
         <h1>Review Employer</h1>
         <form action="employer_review_form_submission.php" method="post">
@@ -60,8 +59,8 @@
                     <label for="currentJob">Is this your current job?</label>
                     <select class="form-control" id="currentJob">
                         <option value = "0">Select...</option>
-                        <option>Yes</option>
-                        <option>No</option>
+                        <option value = "1">Yes</option>
+                        <option value = "2">No</option> //this cannot be correct
                     </select>
                 </div>
                 <div class="col-md-4">
@@ -104,7 +103,7 @@
                 <div class="col-md-4">
                     <label for="businessOutlook">Business Outlook</label> <!--not required-->
                     <select class="form-control" id="businessOutlook">
-                        <option>Select</option>
+                        <option value="0">Select</option>
                         <option>Positive</option>
                         <option>Neutral</option>
                         <option>Negative</option>
@@ -113,7 +112,7 @@
                 <div class="col-md-4">
                     <label for="recommendToFriend">Would you recommend this company to a friend?</label> <!--not required-->
                     <select class="form-control" id="recommendToFriend">
-                        <option>Select</option>
+                        <option value="0">Select</option>
                         <option>Yes</option>
                         <option>No</option>
                     </select>
@@ -121,7 +120,7 @@
                 <div class="col-md-4">
                     <label for="ceoRating">CEO Rating</label> <!--not required-->
                     <select class="form-control" id="ceoRating">
-                        <option>Select</option>
+                        <option value="0">Select</option>
                         <option>Approve</option>
                         <option>No opinion</option>
                         <option>Disapprove</option>
@@ -133,34 +132,34 @@
                 <div class="col-md-4">
                     <label for="careerOpportunities">Rating of Career Opportunities</label> <!--not required-->
                     <select class="form-control" id="careerOpportunities">
-                        <option>Select</option>
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
+                        <option value="0">Select</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
                     </select>
                 </div>
                 <div class="col-md-4">
                     <label for="compensation">Rating of Compensation and Benefits</label> <!--not required-->
                     <select class="form-control" id="compensation">
-                        <option>Select</option>
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
+                        <option value="0">Select</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
                     </select>
                 </div>
                 <div class="col-md-4">
                     <label for="culture">Rating of Culture and Values</label> <!--not required-->
                     <select class="form-control" id="culture">
-                        <option>Select</option>
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
+                        <option value="0">Select</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
                     </select>
                 </div>
             </div>
@@ -169,34 +168,34 @@
                 <div class="col-md-4">
                     <label for="diversity">Rating of Diversity and Inclusion</label> <!--not required-->
                     <select class="form-control" id="diversity">
-                        <option>Select</option>
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
+                        <option value="0">Select</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
                     </select>
                 </div>
                 <div class="col-md-4">
                     <label for="seniorLeadership">Rating of Senior Leadership</label> <!--not required-->
                     <select class="form-control" id="seniorLeadership">
-                        <option>Select</option>
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
+                        <option value="0">Select</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
                     </select>
                 </div>
                 <div class="col-md-4">
                     <label for="workLifeBalance">Rating of Work-Life Balance</label> <!--not required-->
                     <select class="form-control" id="workLifeBalance">
-                        <option>Select</option>
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
+                        <option value="0">Select</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
                     </select>
                 </div>
             </div>
@@ -211,10 +210,7 @@
         </form>
     </div>
 
-
-
     <?php
-
 ?>
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

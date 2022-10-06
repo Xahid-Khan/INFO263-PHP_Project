@@ -1,72 +1,76 @@
 <?php
 
-class Review
-{
-    protected $employer;
-    protected $overallRating;
-    protected $jobTitle;
-    protected $employmentStatus;
-    protected $currentJob;
-    protected $jobEndingYear;
-    protected $yearsEmployed;
+function insertReview($review){
+    try {
+        $open_review_s_db = new PDO("sqlite:open_review_s_sqlite.db");
+        $open_review_s_db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    } catch (PDOException $e) {
+        die($e->getMessage());
+    }
 
-    protected $summary;
-    protected $advice;
-    protected $pros;
-    protected $cons;
+    //TODO: figure out how to insert employer
 
-    protected $businessOutlook;
-    protected $recommendToFriend;
-    protected $ceoRating;
-    protected $careerOpportunities;
-    protected $compensation;
-    protected $culture;
-    protected $diversity;
-    protected $seniorLeadership;
-    protected $workLifeBalance;
+    $query = "INSERT INTO employerReview_S (
+                              employerId, reviewDateTime,
+                              advice, cons,employmentStatus, isCurrentJob,
+                              jobEndingYear,jobTitle,lengthOfEmployment,pros,
+                              ratingBusinessOutlook,
+                              ratingCareerOpportunities,
+                              ratingCeo,
+                              ratingCompensationAndBenefits,
+                              ratingCultureAndValues,
+                              ratingDiversityAndInclusion,
+                              ratingOverall,
+                              ratingRecommendToFriend,
+                              ratingSeniorLeadership,
+                              ratingWorkLifeBalance,
+                              summary) 
+                VALUES (
+                        0,
+                        NOW(),
+                        :advice,:cons, :employmentStatus, :currentJob,
+                        :jobEndingYear,:jobTitle, yearsEmployed, :pros,
+                        :businessOutlook,
+                        :careerOpportunities,
+                        :ceoRating,
+                        :compensation,
+                        :culture,
+                        :diversity,
+                        :overallRating,
+                        :recommendToFriend,
+                        :seniorLeadership,:workLifeBalance, :summary);";
 
-    public function __construct($employer, $overallRating,
-                                $jobTitle, $employmentStatus,
-                                $currentJob, $jobEndingYear, $yearsEmployed,
-                                $summary, $advice, $pros, $cons,
-                                $businessOutlook, $recommendToFriend, $ceoRating,
-                                $careerOpportunities, $compensation, $culture,
-                                $diversity, $seniorLeadership, $workLifeBalance) {
-        $this->employer = $employer;
-        $this->overallRating = $overallRating;
-        $this->jobTitle = $jobTitle;
-        $this->employmentStatus = $employmentStatus;
+    try {
+        $stmt = $open_review_s_db->prepare($query);
 
-        $this->currentJob = $currentJob;
-        $this->jobEndingYear = $jobEndingYear;
-        $this->yearsEmployed = $yearsEmployed;
+        $stmt->bindParam(':advice', $review->advice);
+        $stmt->bindParam(':cons', $review->cons);
+        $stmt->bindParam(':employmentStatus', $review->employmentStatus);
+        $stmt->bindParam(':currentJob', $review->currentJob, PDO::PARAM_INT);
+        $stmt->bindParam(':jobEndingYear', $review->jobEndingYear, PDO::PARAM_INT);
+        $stmt->bindParam(':jobTitle', $review->jobTitle);
+        $stmt->bindParam(':yearsEmployed', $review->yearsEmployed, PDO::PARAM_INT);
+        $stmt->bindParam(':pros', $review->pros);
+        $stmt->bindParam(':businessOutlook', $review->businessOutlook);
+        $stmt->bindParam(':careerOpportunities', $review->careerOpportunities, PDO::PARAM_INT);
+        $stmt->bindParam(':ceoRating', $review->ceoRating);
+        $stmt->bindParam(':compensation', $review->compensation, PDO::PARAM_INT);
+        $stmt->bindParam(':culture', $review->culture, PDO::PARAM_INT);
+        $stmt->bindParam(':diversity', $review->diversity, PDO::PARAM_INT);
+        $stmt->bindParam(':overallRating', $review->overallRating, PDO::PARAM_INT);
+        $stmt->bindParam(':recommendToFriend', $review->recommendToFriend);
+        $stmt->bindParam(':seniorLeadership', $review->seniorLeadership, PDO::PARAM_INT);
+        $stmt->bindParam(':workLifeBalance', $review->workLifeBalance, PDO::PARAM_INT);
+        $stmt->bindParam(':summary', $review->summary);
 
-        $this->summary = $summary;
-        $this->advice = $advice;
-        $this->pros = $pros;
-        $this->cons = $cons;
-
-        $this->businessOutlook = $businessOutlook;
-        $this->recommendToFriend = $recommendToFriend;
-        $this->ceoRating = $ceoRating;
-
-        $this->careerOpportunities = $careerOpportunities;
-        $this->compensation = $compensation;
-        $this->culture = $culture;
-
-        $this->diversity = $diversity;
-        $this->seniorLeadership = $seniorLeadership;
-        $this->workLifeBalance = $workLifeBalance;
+        $stmt->execute();
+    } catch (PDOException $e) {
+        die($e->getMessage());
     }
 }
 
-function insertReview($review){
-    // connect to db?
-
-    $review->employer;
-}
-
 if (isset($_POST['employer'])) {
+    //TODO: input validation??
     $employer = htmlspecialchars($_POST['employer']);
     $overallRating = $_POST['overallRating'];
     $jobTitle = $_POST['jobTitle'];
@@ -74,6 +78,15 @@ if (isset($_POST['employer'])) {
     /* if ($employmentStatus == 0) {
         $employmentStatus = null;
     } is this needed???*/
+
+    /* OR:
+    $employment_statuses = array("regular", "part time", "contract", "freelance", "intern");
+    if ($employmentStatus == 0) {
+        $employmentStatus = null;
+    } elseif (!in_array(strtolower($employmentStatus))) {
+        echo "This isn't a valid employment status, please select one from the dropdown menu"
+    } */
+
     $currentJob = $_POST['currentJob'];
     $jobEndingYear = $_POST['jobEndingYear'];
     $yearsEmployed = $_POST['yearsEmployed'];
@@ -84,8 +97,12 @@ if (isset($_POST['employer'])) {
     $cons = $_POST['cons'];
 
     $businessOutlook = $_POST['businessOutlook'];
+    // $business_outlook_options = array("positive", "neutral", "negative");
     $recommendToFriend = $_POST['recommendToFriend'];
+    // $recommend_friend_options = array("yes", "no");
+    // note - these values need to be changed to enum('NEGATIVE','POSITIVE')
     $ceoRating = $_POST['ceoRating'];
+    // $ceo_rating_options = array("approve", "no opinion", "disapprove");
     $careerOpportunities = $_POST['careerOpportunities'];
     $compensation = $_POST['compensation'];
     $culture = $_POST['culture'];
@@ -110,16 +127,6 @@ if (isset($_POST['employer'])) {
     }
 }
 
-/*if (isset($_POST['employer'])) {
-    var_dump($_POST['employer']);
-
-    $employer = $_POST['employer'];
-
-    echo 'success';
-    //echo "Thanks for your review of $employer 'NAME' (TODO)<br>";
-} else {
-    echo 'Please provide the name of the Employer you are reviewing.';
-}*/
 
 
 
