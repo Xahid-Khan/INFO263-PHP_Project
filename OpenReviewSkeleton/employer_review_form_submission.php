@@ -1,5 +1,7 @@
 <?php
 
+require_once 'Review.php';
+
 function insertReview($review){
     try {
         $open_review_s_db = new PDO("sqlite:open_review_s_sqlite.db");
@@ -11,7 +13,7 @@ function insertReview($review){
     //TODO: figure out how to insert employer
 
     $query = "INSERT INTO employerReview_S (
-                              employerId, reviewDateTime,
+                              reviewID, employerId, reviewDateTime,
                               advice, cons,employmentStatus, isCurrentJob,
                               jobEndingYear,jobTitle,lengthOfEmployment,pros,
                               ratingBusinessOutlook,
@@ -26,10 +28,9 @@ function insertReview($review){
                               ratingWorkLifeBalance,
                               summary) 
                 VALUES (
-                        0,
-                        NOW(),
+                        0,0,0,
                         :advice,:cons, :employmentStatus, :currentJob,
-                        :jobEndingYear,:jobTitle, yearsEmployed, :pros,
+                        :jobEndingYear,:jobTitle, :yearsEmployed, :pros,
                         :businessOutlook,
                         :careerOpportunities,
                         :ceoRating,
@@ -116,8 +117,7 @@ if (isset($_POST['employer'])) {
         echo "Review not submitted: Please provide an overall rating for $employer";
     } else {
         // debugging
-        echo "we are about to submit your review";
-        echo "$employer";
+       // echo "we are about to submit your review";
 
         // the review is not being created for some reason, every step after this is not being reached
         // how do we include the review class in this php file??
@@ -130,8 +130,27 @@ if (isset($_POST['employer'])) {
             $diversity, $seniorLeadership, $workLifeBalance);
 
         echo "$review->employer";
+        echo "$review->overallRating";
+        echo "$review->jobTitle";
+        /*echo "$review->employmentStatus";
+        echo "$review->currentJob";
+        echo "$review->jobEndingYear";
+        echo "$review->yearsEmployed";
+        echo "$review->summary";
+        echo "$review->advice";
+        echo "$review->pros";
+        echo "$review->cons";
+        echo "$review->businessOutlook";
+        echo "$review->recommendToFriend";
+        echo "$review->ceoRating";
+        echo "$review->careerOpportunities";
+        echo "$review->compensation";
+        echo "$review->culture";
+        echo "$review->diversity";
+        echo "$review->seniorLeadership";
+        echo "$review->workLifeBalance";*/
 
-        echo "your review has been created";
+        echo "object has been created";
 
         insertReview($review);
 

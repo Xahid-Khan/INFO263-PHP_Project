@@ -12,12 +12,17 @@
     <link rel="stylesheet" href="css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <!--Navigation bar-->
     <?php include "fragments/navbar.php" ?><br>
+
+    <?php
+    if (!(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'])) {
+        header('Location: login.php?message=Please login to review an employer');
+        exit;
+    }
+    ?>
 
     <div class="container">
         <h1>Review Employer</h1>
@@ -27,12 +32,12 @@
             <div class="row">
                 <div class="col-md-8">
                     <label for="employer">Employer (temp)</label>
-                    <input type="text" id="employer" name="employer" class="form-control" placeholder="e.g. Google">
+                    <input type="text" id="employer" name="employer" class="form-control" placeholder="e.g. Google" onchange="validateEmployer()">
                 </div>
                 <div class="col-md-4">
-                    <label for="overallRating">Overall Rating</label> <!--not required-->
-                    <select class="form-control" id="overallRating" name="overallRating">
-                        <option value="0">Select...</option>
+                    <label for="overallRating" id="overallRatingLabel">Overall Rating </label>
+                    <select class="form-control" id="overallRating" name="overallRating" onchange="validateOverallRating()">
+                        <option value="-1">Select...</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -44,18 +49,18 @@
             <br>
             <div class="row">
                 <div class="col-md-8">
-                    <label for="jobTitle">Job Title</label>
-                    <input type="text" class="form-control" id="jobTitle" placeholder="e.g. Software Engineer">
+                    <label for="jobTitle" id="jobTitleLabel">Job Title</label>
+                    <input type="text" class="form-control" id="jobTitle" placeholder="e.g. Software Engineer" onchange="validateJobTitle()">
                 </div>
                 <div class="col-md-4">
-                    <label for="employmentStatus">Employment Status</label> <!--not required-->
-                    <select class="form-control" id="employmentStatus">
-                        <option value = "0">Select...</option>
-                        <option>Regular</option>
-                        <option>Part Time</option>
-                        <option>Contract</option>
-                        <option>Freelance</option>
-                        <option>Intern</option>
+                    <label for="employmentStatus" id="employmentStatusLabel">Employment Status</label>
+                    <select class="form-control" id="employmentStatus" onchange="validateEmploymentStatus()">
+                        <option value = "-1">Select...</option>
+                        <option value="REGULAR">Regular</option>
+                        <option value="PART_TIME">Part Time</option>
+                        <option value="CONTRACT">Contract</option>
+                        <option value="FREELANCE">Freelance</option>
+                        <option value="INTERN">Intern</option>
                     </select>
                 </div>
             </div>
@@ -64,9 +69,9 @@
                 <div class="col-md-4">
                     <label for="currentJob">Is this your current job?</label>
                     <select class="form-control" id="currentJob">
-                        <option value = "0">Select...</option>
+                        <option value = "-1">Select...</option>
                         <option value = "1">Yes</option>
-                        <option value = "2">No</option> //this cannot be correct
+                        <option value = "0">No</option> 
                     </select>
                 </div>
                 <div class="col-md-4">
@@ -118,9 +123,9 @@
                 <div class="col-md-4">
                     <label for="recommendToFriend">Would you recommend this company to a friend?</label> <!--not required-->
                     <select class="form-control" id="recommendToFriend">
-                        <option value="0">Select</option>
-                        <option>Yes</option>
-                        <option>No</option>
+                        <option value="-1">Select</option>
+                        <option value="POSITIVE">Yes</option>
+                        <option value="NEGATIVE">No</option>
                     </select>
                 </div>
                 <div class="col-md-4">
@@ -218,18 +223,10 @@
 
     <?php
 ?>
-
+    <script src="js/review.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <?php
-    if (!(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'])) {
-        header('Location: login.php?message=Please login to review an employer');
-        exit;
-    }
-    ?>
-<h1>Review Employer</h1>
-
 
 </body>
 </html>

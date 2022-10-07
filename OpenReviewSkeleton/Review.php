@@ -2,28 +2,29 @@
 
 class Review
 {
+    //everything has been made public for debugging purposes
     public $employer;
-    protected $overallRating;
-    protected $jobTitle;
-    protected $employmentStatus;
-    protected $currentJob;
-    protected $jobEndingYear;
-    protected $yearsEmployed;
+    public $overallRating;
+    public $jobTitle;
+    public $employmentStatus;
+    public $currentJob;
+    public $jobEndingYear;
+    public $yearsEmployed;
 
-    protected $summary;
-    protected $advice;
-    protected $pros;
-    protected $cons;
+    public $summary;
+    public $advice;
+    public $pros;
+    public $cons;
 
-    protected $businessOutlook;
-    protected $recommendToFriend;
-    protected $ceoRating;
-    protected $careerOpportunities;
-    protected $compensation;
-    protected $culture;
-    protected $diversity;
-    protected $seniorLeadership;
-    protected $workLifeBalance;
+    public $businessOutlook;
+    public $recommendToFriend;
+    public $ceoRating;
+    public $careerOpportunities;
+    public $compensation;
+    public $culture;
+    public $diversity;
+    public $seniorLeadership;
+    public $workLifeBalance;
 
     public function __construct($employer, $overallRating,
                                 $jobTitle, $employmentStatus,
