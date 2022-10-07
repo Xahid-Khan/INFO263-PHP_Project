@@ -14,7 +14,12 @@
 <body>
     <!--Navigation bar-->
     <?php include "fragments/navbar.php" ?><br>
-
+    <?php
+    if (!(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'])) {
+        header('Location: login.php?message=Please login to review an employer');
+        exit;
+    }
+    ?>
 <h1>Review Employer</h1>
 
 

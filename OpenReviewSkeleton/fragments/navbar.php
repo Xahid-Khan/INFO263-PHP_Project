@@ -9,6 +9,10 @@
     <meta charset="UTF-8">
 </head>
 <body>
+<?php
+session_start();
+
+?>
     <!--Got some help from this-->
     <!--https://stackoverflow.com/questions/19733447/bootstrap-navbar-with-left-center-or-right-aligned-items-->
     <nav class="navbar navbar-expand-md navbar-dark bg-dark">
@@ -37,6 +41,35 @@
                     <a class="navbar-brand" href="review_employer.php">
                         <button class="btn btn-sm btn-outline-light" type="button">Review an Employer</button>
                     </a>
+                </li>
+            </ul>
+        </div>
+        <div style="float: left;">
+            <ul class="navbar-nav mr-auto" style="float: right">
+                <li class="nav-item">
+                    <?php
+                    if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']) {
+                        echo "<a class='navbar-brand' href='validations/logout.php'>
+                                <button class='btn btn-sm btn-outline-light' type='button' >Logout</button>
+                            </a>";
+                    } else {
+                        echo "<a class='navbar-brand' href='login.php'>
+                                <button class='btn btn-sm btn-outline-light' type='button' >Login</button>
+                            </a>";
+                    }
+                    ?>
+                </li>
+                <li class="nav-item">
+                    <label style="color: wheat; text-align: left; padding: 5px 14px 0 0;">
+                        <?php
+                        if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']) {
+                            $name = $_SESSION['firstName'];
+                            echo $name;
+                        } else {
+                            echo "Guest";
+                        }
+                        ?>
+                    </label>
                 </li>
             </ul>
         </div>
