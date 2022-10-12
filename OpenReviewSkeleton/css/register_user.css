@@ -53,7 +53,7 @@ h1{
 }
 
 .card-block-login{
-    height:  60vh;
+    min-height:  60vh;
     padding-top: 8%;
     display: grid;
     justify-content: center;
