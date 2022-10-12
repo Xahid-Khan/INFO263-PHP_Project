@@ -13,67 +13,108 @@
 session_start();
 
 ?>
-    <!--Got some help from this-->
-    <!--https://stackoverflow.com/questions/19733447/bootstrap-navbar-with-left-center-or-right-aligned-items-->
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-        <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="navbar-brand p-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-search-heart" viewBox="0 0 16 16">
-                            <path d="M6.5 4.482c1.664-1.673 5.825 1.254 0 5.018-5.825-3.764-1.664-6.69 0-5.018Z"/>
-                            <path d="M13 6.5a6.471 6.471 0 0 1-1.258 3.844c.04.03.078.062.115.098l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1.007 1.007 0 0 1-.1-.115h.002A6.5 6.5 0 1 1 13 6.5ZM6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11Z"/>
-                        </svg>
-                        Rater
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="navbar-brand" href="index.php">
-                        <button class="btn btn-sm btn-outline-light" type="button" >Home</button>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="navbar-brand" href="employer_rankings.php">
-                        <button class="btn btn-sm btn-outline-light" type="button">Employer Rankings</button>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="navbar-brand" href="review_employer.php">
-                        <button class="btn btn-sm btn-outline-light" type="button">Review an Employer</button>
-                    </a>
-                </li>
-            </ul>
-        </div>
-        <div style="float: left;">
-            <ul class="navbar-nav mr-auto" style="float: right">
-                <li class="nav-item">
+<!--Got some help from this-->
+<!--https://stackoverflow.com/questions/19733447/bootstrap-navbar-with-left-center-or-right-aligned-items-->
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="navbar-brand p-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-search-heart" viewBox="0 0 16 16">
+                        <path d="M6.5 4.482c1.664-1.673 5.825 1.254 0 5.018-5.825-3.764-1.664-6.69 0-5.018Z"/>
+                        <path d="M13 6.5a6.471 6.471 0 0 1-1.258 3.844c.04.03.078.062.115.098l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1.007 1.007 0 0 1-.1-.115h.002A6.5 6.5 0 1 1 13 6.5ZM6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11Z"/>
+                    </svg>
+                    Rater
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="navbar-brand" href="index.php">
+                    <button class="btn btn-sm btn-outline-light" type="button" >Home</button>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="navbar-brand" href="employer_rankings.php">
+                    <button class="btn btn-sm btn-outline-light" type="button">Employer Rankings</button>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="navbar-brand" href="review_employer.php">
+                    <button class="btn btn-sm btn-outline-light" type="button">Review an Employer</button>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div style="float: left;">
+        <ul class="navbar-nav mr-auto" style="float: right">
+            <li class="nav-item" style="padding-top: 3px">
+                <?php
+                if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']) {
+                    echo "<a class='navbar-brand' href='validations/logout.php'>
+                            <button class='btn btn-sm btn-outline-light' type='button' >Logout</button>
+                        </a>";
+                } else {
+                    echo "<a class='navbar-brand' href='login.php'>
+                            <button class='btn btn-sm btn-outline-light' type='button' >Login</button>
+                        </a>";
+                }
+                ?>
+            </li>
+            <li class="nav-item">
+                <label style="color: wheat; text-align: left; padding: 10px 5px 0 0;">
                     <?php
                     if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']) {
-                        echo "<a class='navbar-brand' href='validations/logout.php'>
-                                <button class='btn btn-sm btn-outline-light' type='button' >Logout</button>
-                            </a>";
+                        $name = $_SESSION['firstName'];
+                        echo $name;
                     } else {
-                        echo "<a class='navbar-brand' href='login.php'>
-                                <button class='btn btn-sm btn-outline-light' type='button' >Login</button>
-                            </a>";
+                        echo "Guest";
                     }
                     ?>
-                </li>
-                <li class="nav-item">
-                    <label style="color: wheat; text-align: left; padding: 5px 14px 0 0;">
-                        <?php
-                        if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']) {
-                            $name = $_SESSION['firstName'];
-                            echo $name;
-                        } else {
-                            echo "Guest";
-                        }
-                        ?>
-                    </label>
-                </li>
-            </ul>
+                </label>
+            </li>
+            <li>
+                <img src="https://humanimals.co.nz/wp-content/uploads/2019/11/blank-profile-picture-973460_640.png"
+                     width="50px" height="50px" style="border-radius: 15px; margin-right: 10px; cursor: pointer"
+                />
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <h4 class="modal-title w-100 font-weight-bold">Sign in</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body mx-3">
+                <div class="md-form mb-5">
+                    <i class="fas fa-envelope prefix grey-text"></i>
+                    <input type="email" id="defaultForm-email" class="form-control validate">
+                    <label data-error="wrong" data-success="right" for="defaultForm-email">Your email</label>
+                </div>
+
+                <div class="md-form mb-4">
+                    <i class="fas fa-lock prefix grey-text"></i>
+                    <input type="password" id="defaultForm-pass" class="form-control validate">
+                    <label data-error="wrong" data-success="right" for="defaultForm-pass">Your password</label>
+                </div>
+
+            </div>
+            <div class="modal-footer d-flex justify-content-center">
+                <button class="btn btn-default">Login</button>
+            </div>
         </div>
-    </nav>
+    </div>
+</div>
+
+<div class="text-center">
+    <a href="" class="btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#modalLoginForm">Launch
+        Modal Login Form</a>
+</div>
 
 </body>
 </html>

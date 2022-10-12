@@ -19,6 +19,8 @@ function openConnection(): PDO
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     } catch (PDOException $e) {
         throw new PDOException($e->getMessage(), (int)$e->getCode());
+        $error = "Unable to connect to the database...";
+        header("Location:../login.php?message=$error");
     }
     return $pdo;
 }
@@ -38,10 +40,8 @@ function attemptLogin($email, $password): bool {
             $error = "Please enter the correct email and password";
             header("Location:../login.php?message=$error");
         }
-
         return true;
-    } catch (PDOException $e) {
-        die($e->getMessage());
+    } catch (Exception $e) {
         $error = "Server Error - Try again later";
         header("Location:../login.php?message=$error");
     }
