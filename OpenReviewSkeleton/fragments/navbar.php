@@ -38,8 +38,14 @@ session_start();
                 </a>
             </li>
             <li class="nav-item">
-                <a class="navbar-brand" href="review_employer.php">
-                    <button class="btn btn-sm btn-outline-light" type="button">Review an Employer</button>
+                <?php
+                if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']) {
+                    echo "<a class='navbar-brand' href='review_employer.php'>";
+                } else {
+                    echo "<a class='navbar-brand' href='login.php?message=Please login to review an employer'>";
+                }
+                ?>
+                <button class='btn btn-sm btn-outline-light' type='button'>Review an Employer</button>
                 </a>
             </li>
         </ul>
@@ -72,49 +78,42 @@ session_start();
                 </label>
             </li>
             <li>
-                <img src="https://humanimals.co.nz/wp-content/uploads/2019/11/blank-profile-picture-973460_640.png"
-                     width="50px" height="50px" style="border-radius: 15px; margin-right: 10px; cursor: pointer"
-                />
+                <a data-toggle="modal" data-target="#exampleModal">
+                    <img src="https://humanimals.co.nz/wp-content/uploads/2019/11/blank-profile-picture-973460_640.png"
+                         width="50px" height="50px" style="border-radius: 15px; margin-right: 10px; cursor: pointer"
+                    />
+                </a>
             </li>
         </ul>
-    </div>
-</nav>
-
-<div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header text-center">
-                <h4 class="modal-title w-100 font-weight-bold">Sign in</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body mx-3">
-                <div class="md-form mb-5">
-                    <i class="fas fa-envelope prefix grey-text"></i>
-                    <input type="email" id="defaultForm-email" class="form-control validate">
-                    <label data-error="wrong" data-success="right" for="defaultForm-email">Your email</label>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <label class="btn btn-primary">
+                            Choose File
+                            <input id="user-image" name="user_image" type="file" style="display: none"
+                                   onchange="showPreview()"
+                            />
+                        </label>
+                        <img id="image-preview" src="" height="100px" width="100px" alt="Choose Photo">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
                 </div>
-
-                <div class="md-form mb-4">
-                    <i class="fas fa-lock prefix grey-text"></i>
-                    <input type="password" id="defaultForm-pass" class="form-control validate">
-                    <label data-error="wrong" data-success="right" for="defaultForm-pass">Your password</label>
-                </div>
-
-            </div>
-            <div class="modal-footer d-flex justify-content-center">
-                <button class="btn btn-default">Login</button>
             </div>
         </div>
     </div>
-</div>
-
-<div class="text-center">
-    <a href="" class="btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#modalLoginForm">Launch
-        Modal Login Form</a>
-</div>
-
-</body>
+</nav>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 </html>
