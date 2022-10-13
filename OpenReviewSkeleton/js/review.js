@@ -73,7 +73,7 @@ const validateCurrentJob = () => {
     return true;
 }
 const validateJobEndingYear = () => {
-    if (!jobEndingYear.value.match(YEARENDREGEX) || jobEndingYear.value > currentYear) {
+    if (!jobEndingYear.value.match(YEARENDREGEX) || jobEndingYear.value > currentYear || jobEndingYear.value == 0) {
         document.getElementById("jobEndingYearLabel").style.color="red";
         return false;
     }

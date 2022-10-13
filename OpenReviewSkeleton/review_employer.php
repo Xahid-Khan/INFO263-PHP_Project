@@ -117,7 +117,7 @@
                 <div class="col-md-4">
                     <label for="businessOutlook">Business Outlook</label> <!--not required-->
                     <select class="form-control" id="businessOutlook" name="businessOutlook">
-                        <option>Select...</option>
+                        <option value="-1">Select...</option>
                         <option value="POSITIVE">Positive</option>
                         <option value="NEUTRAL">Neutral</option>
                         <option value="NEGATIVE">Negative</option>

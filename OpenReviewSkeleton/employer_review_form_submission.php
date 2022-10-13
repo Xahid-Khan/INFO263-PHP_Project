@@ -72,9 +72,13 @@ if (isset($_POST['query'],
     $_POST['jobTitle'],
     $_POST['employmentStatus'],
     $_POST['currentJob'],
-    $_POST['yearsEmployed'])
+    $_POST['yearsEmployed']) &&
 
-){
+    $_POST['overallRating'] != -1 &&
+    ($_POST['jobTitle'] != "" || count($_POST['jobTitle']) >255 || preg_match("/^[a-zA-Z ]*$/", $_POST['jobTitle'])) &&
+    $_POST['employmentStatus'] != -1 &&
+    $_POST['currentJob'] != -1 &&
+    $_POST['yearsEmployed'] != "") {
 
     $employer = htmlspecialchars($_POST['query']);
     $employerID = htmlspecialchars($_POST[$employer]);
@@ -82,7 +86,7 @@ if (isset($_POST['query'],
     $jobTitle = htmlspecialchars($_POST['jobTitle']);
     $employmentStatus = htmlspecialchars($_POST['employmentStatus']);
     $currentJob = htmlspecialchars($_POST['currentJob']);
-    $jobEndingYear = isset($_POST['jobEndingYear']) ? htmlspecialchars($_POST['jobEndingYear']) : "<null>";
+    $jobEndingYear = isset($_POST['jobEndingYear']) ? htmlspecialchars($_POST['jobEndingYear']) : null;
     $yearsEmployed = htmlspecialchars($_POST['yearsEmployed']);
     $summary = isset($_POST['summary']) ? htmlspecialchars($_POST['summary']) : "";
     $advice = isset($_POST['advice']) ? htmlspecialchars($_POST['advice']) : "";
