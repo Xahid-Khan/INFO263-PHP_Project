@@ -61,6 +61,13 @@ const validateCurrentJob = () => {
         document.getElementById("currentJobLabel").style.color="red";
         return false;
     }
+
+    if (currentJob.value == 1) {
+        document.getElementById("jobEndingYear").setAttribute("disabled", "true");
+    } else {
+        document.getElementById("jobEndingYear").removeAttribute("disabled");
+    }
+
     document.getElementById("currentJobLabel").style.color="black";
     return true;
 }

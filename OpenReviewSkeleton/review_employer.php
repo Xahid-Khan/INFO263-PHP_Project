@@ -26,20 +26,16 @@
 
     <div class="container">
         <h1>Review Employer</h1>
-
-        <form action="search.php" method="POST">
-            <input type="text" name="query" id="search"/>
-            <div class="list-group" id="show-list">
-        </form>
-
-
         <form action="employer_review_form_submission.php" method="POST">
             <br>
             <h4>Employment Details:</h4>
             <div class="row">
                 <div class="col-md-8">
                     <label for="employer">Employer (temp)</label>
-                    <input type="text" id="employer" name="employer" class="form-control" placeholder="e.g. Google" onchange="validateEmployer()">
+                    <input type="text" id="search" name="query" class="form-control" placeholder="e.g. Google">
+                    <div class="list-group" id="show-list"
+                         style="position: absolute; background: white; padding: 10px;
+                         border: 1px solid black; width: 61%; display: none"></div>
                 </div>
 
                 <div class="col-md-4">
@@ -250,13 +246,14 @@
                             query: searchText,
                         },
                         success: function (response) {
-
+                            document.getElementById("show-list").style.display = "flex";
                             $("#show-list").html(response);
 
                         },
                     });
                 } else {
-                    $("#show-list").html(response);
+                    document.getElementById("show-list").style.display = "none";
+                    $("#show-list").html("");
                 }
             });
 
@@ -265,7 +262,7 @@
                 console.log(this);
 
                 $("#search").val($(this).text());
-                $("#show-list").html("");
+                document.getElementById("show-list").style.display = "none";
 
                 let found = $(this).text();
 
