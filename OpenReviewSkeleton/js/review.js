@@ -4,6 +4,7 @@ const ALPHAREGEX = /^[a-zA-Z ]*$/;
 const YEARENDREGEX = /^(19|20)\d{2}$/;
 const YEARSEMPLOYEDREGEX = /^(0|[1-9]\d?|100)$/;
 const currentYear = new Date().getFullYear();
+const EMPSTATUSREGEX = /^(PART_TIME|REGULAR|CONTRACT|FREELANCE|INTERN)$/;
 
 const overallRating = document.getElementById("overallRating");
 const employer = document.getElementById("employer");
@@ -49,7 +50,7 @@ const validateJobTitle = () => {
 }
 
 const validateEmploymentStatus = () => {
-    if (employmentStatus.value == -1 || !employmentStatus.value.match("PART_TIME" || "REGULAR" || "CONTRACT" || "FREELANCE" || "INTERN")) {
+    if (employmentStatus.value == -1 || (!employmentStatus.value.match(EMPSTATUSREGEX))){
         document.getElementById("employmentStatusLabel").style.color="red";
         return false;
     }
