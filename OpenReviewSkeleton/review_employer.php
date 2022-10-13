@@ -35,7 +35,7 @@
                     <input type="text" id="search" name="query" class="form-control" placeholder="e.g. Google">
                     <div class="list-group" id="show-list"
                          style="position: absolute; background: white; padding: 10px;
-                         border: 1px solid black; width: 61%; display: none"></div>
+                         border: 1px solid black; width: 30%; display: none"></div>
                 </div>
                 <div class="col-md-4">
                     <label for="overallRating" id="overallRatingLabel">Overall Rating *</label>
@@ -262,13 +262,9 @@
             });
 
             $(document).on("click", ".selectitem", function () {
-
-                console.log(this);
-
                 $("#search").val($(this).text());
+                $("#show-list").html(this);
                 document.getElementById("show-list").style.display = "none";
-                let found = $(this).text();
-
             });
         });
     </script>

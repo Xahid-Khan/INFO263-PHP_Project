@@ -18,7 +18,7 @@ try {
 
         if ($res) {
             foreach ($res as $row) {
-                echo '<a class="selectitem">' . $row['company_name'] . '<input id="'.$row['company_name'].'", name="'.$row['company_name'].'" type="text" value=' . $row['employer_id'] . ' hidden></a>';
+                echo '<a class="selectitem" style="cursor: pointer; margin: 5px">' . $row['company_name'] . '<input id="'.$row['company_name'].'" name="'.$row['company_name'].'" type="text" value=' . $row['employer_id'] . ' hidden="true"></a>';
             }
         } else {
             echo '<p>No Record</p>';

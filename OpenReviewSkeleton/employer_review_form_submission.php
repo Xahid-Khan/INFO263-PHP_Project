@@ -11,8 +11,8 @@ function insertReview($review){
     }
 
     $query = "INSERT INTO employerReview_S (employerId, reviewDateTime,
-                              advice, cons,employmentStatus, isCurrentJob,
-                              jobEndingYear,jobTitle,lengthOfEmployment,pros,
+                              advice, cons, employmentStatus, isCurrentJob,
+                              jobEndingYear, jobTitle, lengthOfEmployment, pros,
                               ratingBusinessOutlook,
                               ratingCareerOpportunities,
                               ratingCeo,
