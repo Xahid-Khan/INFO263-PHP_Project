@@ -25,16 +25,7 @@ try {
         }
     }
 
-    if (isset($_POST['result_clicked'])) {
 
-        $result = $_POST["result_clicked"];
-
-        // this sql query doesn't seem to be right.
-        // $res = $open_review_s_db->query("SELECT * from employer WHERE company_name = '%$result%'");
-
-        echo $result;
-
-    }
 
 } catch (PDOException $e) {
     die($e->getMessage());

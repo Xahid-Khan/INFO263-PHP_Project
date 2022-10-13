@@ -10,8 +10,6 @@ function insertReview($review){
         die($e->getMessage());
     }
 
-    //TODO: figure out how to insert employer
-
     $query = "INSERT INTO employerReview_S (employerId, reviewDateTime,
                               advice, cons,employmentStatus, isCurrentJob,
                               jobEndingYear,jobTitle,lengthOfEmployment,pros,
@@ -27,7 +25,7 @@ function insertReview($review){
                               ratingWorkLifeBalance,
                               summary) 
                 VALUES (
-                        :employerID,0,
+                        :employerID, datetime('now'),
                         :advice,:cons, :employmentStatus, :currentJob,
                         :jobEndingYear,:jobTitle, :yearsEmployed, :pros,
                         :businessOutlook,
@@ -74,9 +72,12 @@ if (isset($_POST['query'],
     $_POST['jobTitle'],
     $_POST['employmentStatus'],
     $_POST['currentJob'],
-    $_POST['yearsEmployed'])){
-    $employer = htmlspecialchars($_POST['query']); //this needs to be changed (to res.company_id?)
-    $employerID = htmlspecialchars($_POST[$employer]); //this needs to be changed (to res.company_id?)
+    $_POST['yearsEmployed'])
+
+){
+
+    $employer = htmlspecialchars($_POST['query']);
+    $employerID = htmlspecialchars($_POST[$employer]);
     $overallRating = htmlspecialchars($_POST['overallRating']);
     $jobTitle = htmlspecialchars($_POST['jobTitle']);
     $employmentStatus = htmlspecialchars($_POST['employmentStatus']);

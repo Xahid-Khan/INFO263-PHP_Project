@@ -78,8 +78,8 @@
                     </select>
                 </div>
                 <div class="col-md-4">
-                    <label for="jobEndingYear" id="jobEndingYearLabel">Job Ending Year *</label>
-                    <input type="text" class="form-control" id="jobEndingYear" placeholder="e.g. 2019" onchange="validateJobEndingYear()">
+                    <label for="jobEndingYear" id="jobEndingYearLabel">Job Ending Year</label>
+                    <input type="text" class="form-control" id="jobEndingYear" name="jobEndingYear" placeholder="e.g. 2019" onchange="validateJobEndingYear()">
                 </div>
                 <div class="col-md-4">
                     <label for="yearsEmployed" id="yearsEmployedLabel">Years Employed *</label>
@@ -134,7 +134,7 @@
                 <div class="col-md-4">
                     <label for="ceoRating">CEO Rating</label> <!--not required-->
                     <select class="form-control" id="ceoRating" name="ceoRating">
-                        <option value="<null>">Select...</option>
+                        <option value="null">Select...</option>
                         <option value="APPROVE">Approve</option>
                         <option value="NO_OPINION">No opinion</option>
                         <option value="DISAPPROVE">Disapprove</option>
@@ -253,7 +253,6 @@
                                 document.getElementById("show-list").style.borderColor = "red";
                                 $("#show-list").html("No company with given name");
                             }
-
                         },
                     });
                 } else {
@@ -268,27 +267,9 @@
 
                 $("#search").val($(this).text());
                 document.getElementById("show-list").style.display = "none";
-
                 let found = $(this).text();
 
-                $.ajax({
-
-                    url: "search.php",
-                    method: "post",
-                    data: {
-                        result_clicked: found,
-                    },
-                    success: function(response) {
-
-                        console.log(response);
-
-                    }
-
-                });
-
-
             });
-
         });
     </script>
 
