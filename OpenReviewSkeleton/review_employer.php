@@ -31,13 +31,12 @@
             <h4>Employment Details:</h4>
             <div class="row">
                 <div class="col-md-8">
-                    <label for="employer">Employer (temp)</label>
+                    <label for="employer">Employer *</label>
                     <input type="text" id="search" name="query" class="form-control" placeholder="e.g. Google">
                     <div class="list-group" id="show-list"
                          style="position: absolute; background: white; padding: 10px;
                          border: 1px solid black; width: 61%; display: none"></div>
                 </div>
-
                 <div class="col-md-4">
                     <label for="overallRating" id="overallRatingLabel">Overall Rating *</label>
                     <select class="form-control" id="overallRating" name="overallRating" onchange="validateOverallRating()">
@@ -54,11 +53,11 @@
             <div class="row">
                 <div class="col-md-8">
                     <label for="jobTitle" id="jobTitleLabel">Job Title *</label>
-                    <input type="text" class="form-control" id="jobTitle" placeholder="e.g. Software Engineer" onchange="validateJobTitle()">
+                    <input type="text" class="form-control" name="jobTitle" id="jobTitle" placeholder="e.g. Software Engineer" onchange="validateJobTitle()">
                 </div>
                 <div class="col-md-4">
                     <label for="employmentStatus" id="employmentStatusLabel">Employment Status *</label>
-                    <select class="form-control" id="employmentStatus" onchange="validateEmploymentStatus()">
+                    <select class="form-control" id="employmentStatus" name="employmentStatus" onchange="validateEmploymentStatus()">
                         <option value = "-1">Select...</option>
                         <option value="REGULAR">Regular</option>
                         <option value="PART_TIME">Part Time</option>
@@ -72,7 +71,7 @@
             <div class="row">
                 <div class="col-md-4">
                     <label for="currentJob" id="currentJobLabel">Is this your current job? *</label>
-                    <select class="form-control" id="currentJob" onchange="validateCurrentJob()">
+                    <select class="form-control" id="currentJob" name="currentJob" onchange="validateCurrentJob()">
                         <option value = "-1">Select...</option>
                         <option value = "1">Yes</option>
                         <option value = "0">No</option>
@@ -84,7 +83,7 @@
                 </div>
                 <div class="col-md-4">
                     <label for="yearsEmployed" id="yearsEmployedLabel">Years Employed *</label>
-                    <input type="text" class="form-control" id="yearsEmployed" placeholder="e.g. 4" onchange="validateYearsEmployed()">
+                    <input type="text" class="form-control" id="yearsEmployed" name="yearsEmployed" placeholder="e.g. 4" onchange="validateYearsEmployed()">
                 </div>
             </div>
             <br>
@@ -93,22 +92,22 @@
             <div class="row">
                 <div class="col-md-6">
                     <label for="summary">Summary</label>
-                    <textarea class="form-control" id="summary" rows="3"></textarea>
+                    <textarea class="form-control" id="summary" name="summary" rows="3"></textarea>
                 </div>
                 <div class="col-md-6">
                     <label for="advice">Advice</label>
-                    <textarea class="form-control" id="advice" rows="3"></textarea>
+                    <textarea class="form-control" id="advice" name="advice" rows="3"></textarea>
                 </div>
             </div>
             <br>
             <div class="row">
                 <div class="col-md-6">
                     <label for="pros">Pros</label>
-                    <textarea class="form-control" id="pros" rows="3"></textarea>
+                    <textarea class="form-control" id="pros" name="pros" rows="3"></textarea>
                 </div>
                 <div class="col-md-6">
                     <label for="cons">Cons</label>
-                    <textarea class="form-control" id="cons" rows="3"></textarea>
+                    <textarea class="form-control" id="cons" name="cons" rows="3"></textarea>
                 </div>
             </div>
             <br>
@@ -117,28 +116,28 @@
             <div class="row">
                 <div class="col-md-4">
                     <label for="businessOutlook">Business Outlook</label> <!--not required-->
-                    <select class="form-control" id="businessOutlook">
-                        <option value="0">Select</option>
-                        <option>Positive</option>
-                        <option>Neutral</option>
-                        <option>Negative</option>
+                    <select class="form-control" id="businessOutlook" name="businessOutlook">
+                        <option>Select...</option>
+                        <option value="POSITIVE">Positive</option>
+                        <option value="NEUTRAL">Neutral</option>
+                        <option value="NEGATIVE">Negative</option>
                     </select>
                 </div>
                 <div class="col-md-4">
                     <label for="recommendToFriend">Would you recommend this company to a friend?</label> <!--not required-->
-                    <select class="form-control" id="recommendToFriend">
-                        <option value="-1">Select</option>
+                    <select class="form-control" id="recommendToFriend" name="recommendToFriend">
+                        <option value="<null>">Select...</option>
                         <option value="POSITIVE">Yes</option>
                         <option value="NEGATIVE">No</option>
                     </select>
                 </div>
                 <div class="col-md-4">
                     <label for="ceoRating">CEO Rating</label> <!--not required-->
-                    <select class="form-control" id="ceoRating">
-                        <option value="0">Select</option>
-                        <option>Approve</option>
-                        <option>No opinion</option>
-                        <option>Disapprove</option>
+                    <select class="form-control" id="ceoRating" name="ceoRating">
+                        <option value="<null>">Select...</option>
+                        <option value="APPROVE">Approve</option>
+                        <option value="NO_OPINION">No opinion</option>
+                        <option value="DISAPPROVE">Disapprove</option>
                     </select>
                 </div>
             </div>
@@ -146,8 +145,8 @@
             <div class="row">
                 <div class="col-md-4">
                     <label for="careerOpportunities">Rating of Career Opportunities</label> <!--not required-->
-                    <select class="form-control" id="careerOpportunities">
-                        <option value="0">Select</option>
+                    <select class="form-control" id="careerOpportunities" name="careerOpportunities">
+                        <option value="0">Select...</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -157,8 +156,8 @@
                 </div>
                 <div class="col-md-4">
                     <label for="compensation">Rating of Compensation and Benefits</label> <!--not required-->
-                    <select class="form-control" id="compensation">
-                        <option value="0">Select</option>
+                    <select class="form-control" id="compensation" name="compensation">
+                        <option value="0">Select...</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -168,8 +167,8 @@
                 </div>
                 <div class="col-md-4">
                     <label for="culture">Rating of Culture and Values</label> <!--not required-->
-                    <select class="form-control" id="culture">
-                        <option value="0">Select</option>
+                    <select class="form-control" id="culture" name="culture">
+                        <option value="0">Select...</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -182,8 +181,8 @@
             <div class="row">
                 <div class="col-md-4">
                     <label for="diversity">Rating of Diversity and Inclusion</label> <!--not required-->
-                    <select class="form-control" id="diversity">
-                        <option value="0">Select</option>
+                    <select class="form-control" id="diversity" name="diversity">
+                        <option value="0">Select...</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -193,8 +192,8 @@
                 </div>
                 <div class="col-md-4">
                     <label for="seniorLeadership">Rating of Senior Leadership</label> <!--not required-->
-                    <select class="form-control" id="seniorLeadership">
-                        <option value="0">Select</option>
+                    <select class="form-control" id="seniorLeadership" name="seniorLeadership">
+                        <option value="0">Select...</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -204,8 +203,8 @@
                 </div>
                 <div class="col-md-4">
                     <label for="workLifeBalance">Rating of Work-Life Balance</label> <!--not required-->
-                    <select class="form-control" id="workLifeBalance">
-                        <option value="0">Select</option>
+                    <select class="form-control" id="workLifeBalance" name="workLifeBalance">
+                        <option value="0">Select...</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>

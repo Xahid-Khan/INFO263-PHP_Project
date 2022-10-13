@@ -1,5 +1,7 @@
 <?php
 
+include_once "Review.php";
+
 function insertReview($review){
     try {
         $open_review_s_db = new PDO("sqlite:validations/open_review_s_sqlite.db");
@@ -25,7 +27,7 @@ function insertReview($review){
                               ratingWorkLifeBalance,
                               summary) 
                 VALUES (
-                        :employerID,GETDATE(),
+                        :employerID,0,
                         :advice,:cons, :employmentStatus, :currentJob,
                         :jobEndingYear,:jobTitle, :yearsEmployed, :pros,
                         :businessOutlook,
@@ -40,7 +42,6 @@ function insertReview($review){
 
     try {
         $stmt = $open_review_s_db->prepare($query);
-        //TODO: add ability for employer to be added/integrate with the predictive text code
         $stmt->bindParam(':employerID', $review->employerID);
         $stmt->bindParam(':advice', $review->advice);
         $stmt->bindParam(':cons', $review->cons);
@@ -68,25 +69,24 @@ function insertReview($review){
     }
 }
 
-if (isset($_POST['employer'],
+if (isset($_POST['query'],
     $_POST['overallRating'],
     $_POST['jobTitle'],
     $_POST['employmentStatus'],
     $_POST['currentJob'],
-    $_POST['jobEndingYear'],
     $_POST['yearsEmployed'])){
-
-    $employer = htmlspecialchars($_POST['employer']); //this needs to be changed (to res.company_id?)
+    $employer = htmlspecialchars($_POST['query']); //this needs to be changed (to res.company_id?)
+    $employerID = htmlspecialchars($_POST[$employer]); //this needs to be changed (to res.company_id?)
     $overallRating = htmlspecialchars($_POST['overallRating']);
     $jobTitle = htmlspecialchars($_POST['jobTitle']);
     $employmentStatus = htmlspecialchars($_POST['employmentStatus']);
     $currentJob = htmlspecialchars($_POST['currentJob']);
-    $jobEndingYear = htmlspecialchars($_POST['jobEndingYear']);
+    $jobEndingYear = isset($_POST['jobEndingYear']) ? htmlspecialchars($_POST['jobEndingYear']) : "<null>";
     $yearsEmployed = htmlspecialchars($_POST['yearsEmployed']);
-    $summary = htmlspecialchars($_POST['summary']);
-    $advice = htmlspecialchars($_POST['advice']);
-    $pros = htmlspecialchars($_POST['pros']);
-    $cons = htmlspecialchars($_POST['cons']);
+    $summary = isset($_POST['summary']) ? htmlspecialchars($_POST['summary']) : "";
+    $advice = isset($_POST['advice']) ? htmlspecialchars($_POST['advice']) : "";
+    $pros = isset($_POST['pros']) ? htmlspecialchars($_POST['pros']) : "";
+    $cons = isset($_POST['cons']) ? htmlspecialchars($_POST['cons']) : "";
     $businessOutlook = htmlspecialchars($_POST['businessOutlook']);
     $recommendToFriend = htmlspecialchars($_POST['recommendToFriend']);
     $ceoRating = htmlspecialchars($_POST['ceoRating']);
@@ -97,17 +97,20 @@ if (isset($_POST['employer'],
     $seniorLeadership = htmlspecialchars($_POST['seniorLeadership']);
     $workLifeBalance = htmlspecialchars($_POST['workLifeBalance']);
 
-    $review = new Review($employer, $overallRating, $jobTitle, $employmentStatus,
+    $review = new Review($employerID, $overallRating, $jobTitle, $employmentStatus,
         $currentJob, $jobEndingYear, $yearsEmployed,
         $summary, $advice, $pros, $cons,
         $businessOutlook, $recommendToFriend, $ceoRating,
         $careerOpportunities, $compensation, $culture,
         $diversity, $seniorLeadership, $workLifeBalance);
-
+    echo 'review object created';
     insertReview($review);
+    echo 'review added to db';
 
 } else {
+    echo $_POST['query'];
     $error = "Please fill all the required fields";
+    echo $error;
 }
 
 

@@ -3,7 +3,7 @@
 class Review
 {
     //everything has been made public for debugging purposes
-    public $employer;
+    public $employerID;
     public $overallRating;
     public $jobTitle;
     public $employmentStatus;
@@ -26,14 +26,14 @@ class Review
     public $seniorLeadership;
     public $workLifeBalance;
 
-    public function __construct($employer, $overallRating,
+    public function __construct($employerID, $overallRating,
                                 $jobTitle, $employmentStatus,
                                 $currentJob, $jobEndingYear, $yearsEmployed,
                                 $summary, $advice, $pros, $cons,
                                 $businessOutlook, $recommendToFriend, $ceoRating,
                                 $careerOpportunities, $compensation, $culture,
                                 $diversity, $seniorLeadership, $workLifeBalance) {
-        $this->employer = $employer;
+        $this->employerID = $employerID;
         $this->overallRating = $overallRating;
         $this->jobTitle = $jobTitle;
         $this->employmentStatus = $employmentStatus;
@@ -61,34 +61,3 @@ class Review
     }
 }
 
-
-
-
-
-
-
-
-/*
- * VALUES (
-                        //employerID,
-                        NOW(),
-                        '$review->advice',
-                        '$review->cons',
-                        '$review->employmentStatus', //enum
-                        $review->currentJob,
-                        $review->jobEndingYear,
-                        '$review->jobTitle',
-                        $review->yearsEmployed,
-                        '$review->pros',
-                        $review->businessOutlook, //enum
-                        $review->careerOpportunities,
-                        $review->ceoRating, //enum
-                        $review->compensation,
-                        $review->culture,
-                        $review->diversity,
-                        $review->overallRating,
-                        $review->recommendToFriend, //enum
-                        $review->seniorLeadership,
-                        $review->workLifeBalance,
-                        '$review->summary')
-*/
