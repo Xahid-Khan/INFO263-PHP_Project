@@ -1,41 +1,41 @@
 <?php
-    try {
-        $open_review_s_db = new PDO("sqlite:validations/open_review_s_sqlite.db");
-        $open_review_s_db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    } catch (PDOException $e) {
-        die($e->getMessage());
-    }
+try {
+    $open_review_s_db = new PDO("sqlite:validations/open_review_s_sqlite.db");
+    $open_review_s_db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    die($e->getMessage());
+}
 
-    try {
-        if (isset($_POST['query'])) {
-            $inpText = $_POST['query'] ;
+try {
+    if (isset($_POST['query'])) {
+        $inpText = $_POST['query'];
 
-            // remove characters which can cause sql injection
-            $cleaned = preg_replace("/[^A-Za-z0-9 ]/", "", $inpText);
+        // remove characters which can cause sql injection
+        $cleaned = preg_replace("/[^A-Za-z0-9 ]/", "", $inpText);
 
-            $res = $open_review_s_db->query("SELECT * FROM employer WHERE company_name LIKE '%$cleaned%' LIMIT 5");
+        $res = $open_review_s_db->query("SELECT * FROM employer WHERE company_name LIKE '%$cleaned%' LIMIT 5");
 
 
-            if ($res) {
-                foreach ($res as $row) {
-                    echo '<a class="selectitem">' . $row['company_name'] . '</a>';
-                }
-            } else {
-                echo '<p>No Record</p>';
+        if ($res) {
+            foreach ($res as $row) {
+                echo '<a class="selectitem">' . $row['company_name'] . '<input id="'.$row['company_name'].'", name="'.$row['company_name'].'" type="text" value=' . $row['employer_id'] . ' hidden></a>';
             }
+        } else {
+            echo '<p>No Record</p>';
         }
-
-        if (isset($_POST['result_clicked'])) {
-
-            $result = $_POST["result_clicked"];
-
-            // this sql query doesn't seem to be right.
-            // $res = $open_review_s_db->query("SELECT * from employer WHERE company_name = '%$result%'");
-
-            echo $result;
-
-        }
-
-    } catch (PDOException $e) {
-        die($e->getMessage());
     }
+
+    if (isset($_POST['result_clicked'])) {
+
+        $result = $_POST["result_clicked"];
+
+        // this sql query doesn't seem to be right.
+        // $res = $open_review_s_db->query("SELECT * from employer WHERE company_name = '%$result%'");
+
+        echo $result;
+
+    }
+
+} catch (PDOException $e) {
+    die($e->getMessage());
+}

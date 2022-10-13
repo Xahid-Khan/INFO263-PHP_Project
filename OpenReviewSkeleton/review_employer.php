@@ -247,7 +247,13 @@
                         },
                         success: function (response) {
                             document.getElementById("show-list").style.display = "flex";
-                            $("#show-list").html(response);
+                            if (response.length > 0) {
+                                document.getElementById("show-list").style.borderColor = "black";
+                                $("#show-list").html(response);
+                            } else {
+                                document.getElementById("show-list").style.borderColor = "red";
+                                $("#show-list").html("No company with given name");
+                            }
 
                         },
                     });
