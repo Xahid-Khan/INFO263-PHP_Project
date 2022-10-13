@@ -1,10 +1,8 @@
 <?php
 
-require_once 'Review.php';
-
 function insertReview($review){
     try {
-        $open_review_s_db = new PDO("sqlite:open_review_s_sqlite.db");
+        $open_review_s_db = new PDO("sqlite:validations/open_review_s_sqlite.db");
         $open_review_s_db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     } catch (PDOException $e) {
         die($e->getMessage());
@@ -12,8 +10,7 @@ function insertReview($review){
 
     //TODO: figure out how to insert employer
 
-    $query = "INSERT INTO employerReview_S (
-                              reviewID, employerId, reviewDateTime,
+    $query = "INSERT INTO employerReview_S (employerId, reviewDateTime,
                               advice, cons,employmentStatus, isCurrentJob,
                               jobEndingYear,jobTitle,lengthOfEmployment,pros,
                               ratingBusinessOutlook,
@@ -28,7 +25,7 @@ function insertReview($review){
                               ratingWorkLifeBalance,
                               summary) 
                 VALUES (
-                        0,0,0,
+                        :employerID,GETDATE(),
                         :advice,:cons, :employmentStatus, :currentJob,
                         :jobEndingYear,:jobTitle, :yearsEmployed, :pros,
                         :businessOutlook,
@@ -44,6 +41,7 @@ function insertReview($review){
     try {
         $stmt = $open_review_s_db->prepare($query);
         //TODO: add ability for employer to be added/integrate with the predictive text code
+        $stmt->bindParam(':employerID', $review->employerID);
         $stmt->bindParam(':advice', $review->advice);
         $stmt->bindParam(':cons', $review->cons);
         $stmt->bindParam(':employmentStatus', $review->employmentStatus);
@@ -70,94 +68,48 @@ function insertReview($review){
     }
 }
 
-if (isset($_POST['employer'])) {
-    //TODO: input validation??
-    $employer = htmlspecialchars($_POST['employer']);
-    $overallRating = $_POST['overallRating'];
-    $jobTitle = $_POST['jobTitle'];
-    $employmentStatus = $_POST['employmentStatus'];
-    /* if ($employmentStatus == 0) {
-        $employmentStatus = null;
-    } is this needed???*/
+if (isset($_POST['employer'],
+    $_POST['overallRating'],
+    $_POST['jobTitle'],
+    $_POST['employmentStatus'],
+    $_POST['currentJob'],
+    $_POST['jobEndingYear'],
+    $_POST['yearsEmployed'])){
 
-    /* OR:
-    $employment_statuses = array("regular", "part time", "contract", "freelance", "intern");
-    if ($employmentStatus == 0) {
-        $employmentStatus = null;
-    } elseif (!in_array(strtolower($employmentStatus))) {
-        echo "This isn't a valid employment status, please select one from the dropdown menu"
-    } */
+    $employer = htmlspecialchars($_POST['employer']); //this needs to be changed (to res.company_id?)
+    $overallRating = htmlspecialchars($_POST['overallRating']);
+    $jobTitle = htmlspecialchars($_POST['jobTitle']);
+    $employmentStatus = htmlspecialchars($_POST['employmentStatus']);
+    $currentJob = htmlspecialchars($_POST['currentJob']);
+    $jobEndingYear = htmlspecialchars($_POST['jobEndingYear']);
+    $yearsEmployed = htmlspecialchars($_POST['yearsEmployed']);
+    $summary = htmlspecialchars($_POST['summary']);
+    $advice = htmlspecialchars($_POST['advice']);
+    $pros = htmlspecialchars($_POST['pros']);
+    $cons = htmlspecialchars($_POST['cons']);
+    $businessOutlook = htmlspecialchars($_POST['businessOutlook']);
+    $recommendToFriend = htmlspecialchars($_POST['recommendToFriend']);
+    $ceoRating = htmlspecialchars($_POST['ceoRating']);
+    $careerOpportunities = htmlspecialchars($_POST['careerOpportunities']);
+    $compensation = htmlspecialchars($_POST['compensation']);
+    $culture = htmlspecialchars($_POST['culture']);
+    $diversity = htmlspecialchars($_POST['diversity']);
+    $seniorLeadership = htmlspecialchars($_POST['seniorLeadership']);
+    $workLifeBalance = htmlspecialchars($_POST['workLifeBalance']);
 
-    $currentJob = $_POST['currentJob'];
-    $jobEndingYear = $_POST['jobEndingYear'];
-    $yearsEmployed = $_POST['yearsEmployed'];
+    $review = new Review($employer, $overallRating, $jobTitle, $employmentStatus,
+        $currentJob, $jobEndingYear, $yearsEmployed,
+        $summary, $advice, $pros, $cons,
+        $businessOutlook, $recommendToFriend, $ceoRating,
+        $careerOpportunities, $compensation, $culture,
+        $diversity, $seniorLeadership, $workLifeBalance);
 
-    $summary = $_POST['summary'];
-    $advice = $_POST['advice'];
-    $pros = $_POST['pros'];
-    $cons = $_POST['cons'];
+    insertReview($review);
 
-    $businessOutlook = $_POST['businessOutlook'];
-    // $business_outlook_options = array("positive", "neutral", "negative");
-    $recommendToFriend = $_POST['recommendToFriend'];
-    // $recommend_friend_options = array("yes", "no");
-    // note - these values need to be changed to enum('NEGATIVE','POSITIVE')
-    $ceoRating = $_POST['ceoRating'];
-    // $ceo_rating_options = array("approve", "no opinion", "disapprove");
-    $careerOpportunities = $_POST['careerOpportunities'];
-    $compensation = $_POST['compensation'];
-    $culture = $_POST['culture'];
-    $diversity = $_POST['diversity'];
-    $seniorLeadership = $_POST['seniorLeadership'];
-    $workLifeBalance = $_POST['workLifeBalance'];
-
-    if ($employer == "") {
-        echo 'Review not submitted: Please enter your employer';
-    } elseif ($overallRating == 0) {
-        echo "Review not submitted: Please provide an overall rating for $employer";
-    } else {
-        // debugging
-       // echo "we are about to submit your review";
-
-        // the review is not being created for some reason, every step after this is not being reached
-        // how do we include the review class in this php file??
-        $review = new Review($employer, $overallRating,
-            $jobTitle, $employmentStatus,
-            $currentJob, $jobEndingYear, $yearsEmployed,
-            $summary, $advice, $pros, $cons,
-            $businessOutlook, $recommendToFriend, $ceoRating,
-            $careerOpportunities, $compensation, $culture,
-            $diversity, $seniorLeadership, $workLifeBalance);
-
-        echo "$review->employer";
-        echo "$review->overallRating";
-        echo "$review->jobTitle";
-        /*echo "$review->employmentStatus";
-        echo "$review->currentJob";
-        echo "$review->jobEndingYear";
-        echo "$review->yearsEmployed";
-        echo "$review->summary";
-        echo "$review->advice";
-        echo "$review->pros";
-        echo "$review->cons";
-        echo "$review->businessOutlook";
-        echo "$review->recommendToFriend";
-        echo "$review->ceoRating";
-        echo "$review->careerOpportunities";
-        echo "$review->compensation";
-        echo "$review->culture";
-        echo "$review->diversity";
-        echo "$review->seniorLeadership";
-        echo "$review->workLifeBalance";*/
-
-        echo "object has been created";
-
-        insertReview($review);
-
-        // should input validation be done here?
-        echo "Success! Your review has been submitted for $employer";
-    }
+} else {
+    $error = "Please fill all the required fields";
 }
+
 
 
 

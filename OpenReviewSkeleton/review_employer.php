@@ -26,7 +26,14 @@
 
     <div class="container">
         <h1>Review Employer</h1>
-        <form action="employer_review_form_submission.php" method="post">
+
+        <form action="search.php" method="POST">
+            <input type="text" name="query" id="search"/>
+            <div class="list-group" id="show-list">
+        </form>
+
+
+        <form action="employer_review_form_submission.php" method="POST">
             <br>
             <h4>Employment Details:</h4>
             <div class="row">
@@ -34,8 +41,9 @@
                     <label for="employer">Employer (temp)</label>
                     <input type="text" id="employer" name="employer" class="form-control" placeholder="e.g. Google" onchange="validateEmployer()">
                 </div>
+
                 <div class="col-md-4">
-                    <label for="overallRating" id="overallRatingLabel">Overall Rating </label>
+                    <label for="overallRating" id="overallRatingLabel">Overall Rating *</label>
                     <select class="form-control" id="overallRating" name="overallRating" onchange="validateOverallRating()">
                         <option value="-1">Select...</option>
                         <option value="1">1</option>
@@ -49,11 +57,11 @@
             <br>
             <div class="row">
                 <div class="col-md-8">
-                    <label for="jobTitle" id="jobTitleLabel">Job Title</label>
+                    <label for="jobTitle" id="jobTitleLabel">Job Title *</label>
                     <input type="text" class="form-control" id="jobTitle" placeholder="e.g. Software Engineer" onchange="validateJobTitle()">
                 </div>
                 <div class="col-md-4">
-                    <label for="employmentStatus" id="employmentStatusLabel">Employment Status</label>
+                    <label for="employmentStatus" id="employmentStatusLabel">Employment Status *</label>
                     <select class="form-control" id="employmentStatus" onchange="validateEmploymentStatus()">
                         <option value = "-1">Select...</option>
                         <option value="REGULAR">Regular</option>
@@ -67,20 +75,20 @@
             <br>
             <div class="row">
                 <div class="col-md-4">
-                    <label for="currentJob">Is this your current job?</label>
-                    <select class="form-control" id="currentJob">
+                    <label for="currentJob" id="currentJobLabel">Is this your current job? *</label>
+                    <select class="form-control" id="currentJob" onchange="validateCurrentJob()">
                         <option value = "-1">Select...</option>
                         <option value = "1">Yes</option>
-                        <option value = "0">No</option> 
+                        <option value = "0">No</option>
                     </select>
                 </div>
                 <div class="col-md-4">
-                    <label for="jobEndingYear">Job Ending Year</label>
-                    <input type="text" class="form-control" placeholder="e.g. 2019"> <!-- need some type of validation here -->
+                    <label for="jobEndingYear" id="jobEndingYearLabel">Job Ending Year *</label>
+                    <input type="text" class="form-control" id="jobEndingYear" placeholder="e.g. 2019" onchange="validateJobEndingYear()">
                 </div>
                 <div class="col-md-4">
-                    <label for="yearsEmployed">Years Employed</label>
-                    <input type="text" class="form-control" placeholder="e.g. 4"> <!-- need some type of validation here -->
+                    <label for="yearsEmployed" id="yearsEmployedLabel">Years Employed *</label>
+                    <input type="text" class="form-control" id="yearsEmployed" placeholder="e.g. 4" onchange="validateYearsEmployed()">
                 </div>
             </div>
             <br>
@@ -227,6 +235,61 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+
+        $(document).ready(function () {
+            // Send Search Text to the server
+            $("#search").keyup(function () {
+                let searchText = $(this).val();
+                if (searchText != "") {
+                    $.ajax({
+                        url: "search.php",
+                        method: "post",
+                        data: {
+                            query: searchText,
+                        },
+                        success: function (response) {
+
+                            $("#show-list").html(response);
+
+                        },
+                    });
+                } else {
+                    $("#show-list").html(response);
+                }
+            });
+
+            $(document).on("click", ".selectitem", function () {
+
+                console.log(this);
+
+                $("#search").val($(this).text());
+                $("#show-list").html("");
+
+                let found = $(this).text();
+
+                $.ajax({
+
+                    url: "search.php",
+                    method: "post",
+                    data: {
+                        result_clicked: found,
+                    },
+                    success: function(response) {
+
+                        console.log(response);
+
+                    }
+
+                });
+
+
+            });
+
+        });
+    </script>
+
 
 </body>
 </html>

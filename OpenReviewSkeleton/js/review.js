@@ -1,6 +1,9 @@
 "use-strict"
 
 const ALPHAREGEX = /^[a-zA-Z ]*$/;
+const YEARENDREGEX = /^(19|20)\d{2}$/;
+const YEARSEMPLOYEDREGEX = /^(0|[1-9]\d?|100)$/;
+const currentYear = new Date().getFullYear();
 
 const overallRating = document.getElementById("overallRating");
 const employer = document.getElementById("employer");
@@ -54,8 +57,28 @@ const validateEmploymentStatus = () => {
     return true;
 }
 const validateCurrentJob = () => {
+    if (currentJob.value == -1) {
+        document.getElementById("currentJobLabel").style.color="red";
+        return false;
+    }
+    document.getElementById("currentJobLabel").style.color="black";
+    return true;
+}
+const validateJobEndingYear = () => {
+    if (!jobEndingYear.value.match(YEARENDREGEX) || jobEndingYear.value > currentYear) {
+        document.getElementById("jobEndingYearLabel").style.color="red";
+        return false;
+    }
+    document.getElementById("jobEndingYearLabel").style.color="black";
+    return true;
 
 }
-const validateJobEndingYear = () => {}
-const validateYearsEmployed = () => {}
+const validateYearsEmployed = () => {
+    if (!yearsEmployed.value.match(YEARSEMPLOYEDREGEX)) {
+        document.getElementById("yearsEmployedLabel").style.color="red";
+        return false;
+    }
+    document.getElementById("yearsEmployedLabel").style.color="black";
+    return true;
+}
 
