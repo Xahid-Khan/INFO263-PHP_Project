@@ -38,8 +38,14 @@ session_start();
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="navbar-brand" href="review_employer.php">
-                        <button class="btn btn-sm btn-outline-light" type="button">Review an Employer</button>
+                    <?php
+                    if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']) {
+                        echo "<a class='navbar-brand' href='review_employer.php'>";
+                    } else {
+                        echo "<a class='navbar-brand' href='login.php?message=Please login to review an employer'>";
+                    }
+                    ?>
+                    <button class="btn btn-sm btn-outline-light" type="button">Review an Employer</button>
                     </a>
                 </li>
             </ul>

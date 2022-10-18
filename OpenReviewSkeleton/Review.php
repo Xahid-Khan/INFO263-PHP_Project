@@ -3,13 +3,13 @@
 class Review
 {
     //everything has been made public for debugging purposes
-    public $employerID;
-    public $overallRating;
-    public $jobTitle;
-    public $employmentStatus;
-    public $currentJob;
-    public $jobEndingYear;
-    public $yearsEmployed;
+    public int $employerID;
+    public int $overallRating;
+    public string $jobTitle;
+    public string $employmentStatus;
+    public int $currentJob;
+    public int $jobEndingYear;
+    public int $yearsEmployed;
 
     public $summary;
     public $advice;
@@ -19,12 +19,12 @@ class Review
     public $businessOutlook;
     public $recommendToFriend;
     public $ceoRating;
-    public $careerOpportunities;
-    public $compensation;
-    public $culture;
-    public $diversity;
-    public $seniorLeadership;
-    public $workLifeBalance;
+    public int $careerOpportunities;
+    public int $compensation;
+    public int $culture;
+    public int $diversity;
+    public int $seniorLeadership;
+    public int $workLifeBalance;
 
     public function __construct($employerID, $overallRating,
                                 $jobTitle, $employmentStatus,
@@ -39,7 +39,7 @@ class Review
         $this->employmentStatus = $employmentStatus;
 
         $this->currentJob = $currentJob;
-        $this->jobEndingYear = $jobEndingYear;
+        $this->jobEndingYear = (int) $jobEndingYear;
         $this->yearsEmployed = $yearsEmployed;
 
         $this->summary = $summary;

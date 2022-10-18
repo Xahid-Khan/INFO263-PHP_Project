@@ -17,17 +17,24 @@
     <!--Navigation bar-->
     <?php include "fragments/navbar.php" ?><br>
 
-    <?php
-    if (!(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'])) {
-        header('Location: login.php?message=Login to review an employer');
-        exit;
-    }
-    ?>
-
     <div class="container">
         <h1>Review Employer</h1>
         <form action="employer_review_form_submission.php" method="POST">
             <br>
+            <h5 id="error-message" style="display: <?php
+            if (!empty($_GET['message'])) {
+                echo 'block';
+            } else {
+                echo 'none';
+            }
+            ?>; text-align: center; color: red;">
+                <?php
+                if (!empty($_GET['message'])) {
+                    $error = $_GET['message'];
+                    echo $error;
+                }
+                ?>
+            </h5>
             <h4>Employment Details:</h4>
             <div class="row">
                 <div class="col-md-8">
@@ -53,7 +60,8 @@
             <div class="row">
                 <div class="col-md-8">
                     <label for="jobTitle" id="jobTitleLabel">Job Title *</label>
-                    <input type="text" class="form-control" name="jobTitle" id="jobTitle" placeholder="e.g. Software Engineer" onchange="validateJobTitle()">
+                    <input type="text" class="form-control" name="jobTitle" id="jobTitle" placeholder="e.g. Software Engineer"
+                           minlength="3" maxlength="255" onchange="validateJobTitle()">
                 </div>
                 <div class="col-md-4">
                     <label for="employmentStatus" id="employmentStatusLabel">Employment Status *</label>
@@ -126,7 +134,7 @@
                 <div class="col-md-4">
                     <label for="recommendToFriend">Would you recommend this company to a friend?</label> <!--not required-->
                     <select class="form-control" id="recommendToFriend" name="recommendToFriend">
-                        <option value="<null>">Select...</option>
+                        <option value="null">Select...</option>
                         <option value="POSITIVE">Yes</option>
                         <option value="NEGATIVE">No</option>
                     </select>
@@ -217,7 +225,7 @@
             <div class="row">
                 <div class="col">
                     <div class="text-end">
-                        <button type="submit" class="btn btn-primary">Submit Review</button>
+                        <button id="submit" name="submit" type="submit" class="btn btn-primary">Submit Review</button>
                     </div>
                 </div>
             </div>

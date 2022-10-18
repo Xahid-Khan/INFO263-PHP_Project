@@ -2,6 +2,76 @@
 
 include_once "Review.php";
 
+if (isset($_POST['query'],
+        $_POST['overallRating'],
+        $_POST['jobTitle'],
+        $_POST['employmentStatus'],
+        $_POST['currentJob'],
+        $_POST['yearsEmployed'],
+        $_POST['submit']) &&
+    $_POST['overallRating'] > 0 && $_POST['overallRating'] < 6 &&
+    (strlen($_POST['jobTitle']) > 0 && strlen($_POST['jobTitle']) < 255) &&
+    in_array($_POST['employmentStatus'], array("REGULAR", "PART_TIME", "CONTRACT", "FREELANCE", "INTERN")) &&
+    ($_POST['currentJob'] == 0 || $_POST['currentJob'] == 1) &&
+    $_POST['yearsEmployed'] != "" &&
+    $_POST['yearsEmployed'] > -1) {
+
+//    Required Parameters
+    $employer = htmlspecialchars($_POST['query']);
+    $employerID = (int) htmlspecialchars($_POST['employerId']);
+    $overallRating = htmlspecialchars($_POST['overallRating']);
+    $jobTitle = htmlspecialchars($_POST['jobTitle']);
+    $employmentStatus = htmlspecialchars($_POST['employmentStatus']);
+    $currentJob = htmlspecialchars($_POST['currentJob']);
+    $jobEndingYear = isset($_POST['jobEndingYear']) ? htmlspecialchars($_POST['jobEndingYear']) : null;
+    $yearsEmployed = htmlspecialchars($_POST['yearsEmployed']);
+
+//    Optional Parameters
+    $summary = isset($_POST['summary']) && strlen($_POST['summary']) > 0 && strlen($_POST['summary']) < 255 ?
+        htmlspecialchars($_POST['summary']) : null;
+    $advice = isset($_POST['advice']) && strlen($_POST['advice']) > 0 && strlen($_POST['advice']) < 255 ?
+        htmlspecialchars($_POST['advice']) : null;
+    $pros = isset($_POST['pros']) && strlen($_POST['pros']) > 0 && strlen($_POST['pros']) < 255 ?
+        htmlspecialchars($_POST['pros']) : null;
+    $cons = isset($_POST['cons']) && strlen($_POST['cons']) > 0 && strlen($_POST['cons']) < 255 ?
+        htmlspecialchars($_POST['cons']) : null;
+
+    $businessOutlook = isset($_POST['businessOutlook']) && in_array($_POST['businessOutlook'], array("Positive", "Neutral", "Negative")) ?
+        htmlspecialchars($_POST['businessOutlook']) : null;
+    $recommendToFriend = isset($_POST['recommendToFriend']) && in_array($_POST['recommendToFriend'], array("POSITIVE", "NEGATIVE")) ?
+        htmlspecialchars($_POST['recommendToFriend']) : null;
+    $ceoRating = isset($_POST['ceoRating']) && in_array($_POST['ceoRating'], array("APPROVE", "NO_OPINION", "DISAPPROVE")) ?
+        htmlspecialchars($_POST['ceoRating']) : null;
+    $careerOpportunities = isset($_POST['careerOpportunities']) && $_POST['careerOpportunities'] > 0 && $_POST['careerOpportunities'] < 6 ?
+        htmlspecialchars($_POST['careerOpportunities']) : 0;
+    $compensation = isset($_POST['compensation']) && $_POST['compensation'] > 0 && $_POST['compensation'] < 6 ?
+        htmlspecialchars($_POST['compensation']) : 0;
+    $culture = isset($_POST['culture']) && $_POST['culture'] > 0 && $_POST['culture'] < 6 ?
+        htmlspecialchars($_POST['culture']) : 0;
+    $diversity = isset($_POST['diversity']) && $_POST['diversity'] > 0 && $_POST['diversity'] < 6 ?
+        htmlspecialchars($_POST['diversity']) : 0;
+    $seniorLeadership = isset($_POST['seniorLeadership']) && $_POST['seniorLeadership'] > 0 && $_POST['seniorLeadership'] < 6 ?
+        htmlspecialchars($_POST['seniorLeadership']) : 0;
+    $workLifeBalance = isset($_POST['workLifeBalance']) && $_POST['workLifeBalance'] > 0 && $_POST['workLifeBalance'] < 6 ?
+        htmlspecialchars($_POST['workLifeBalance']) : 0;
+
+    $review = new Review($employerID, $overallRating, $jobTitle, $employmentStatus,
+        $currentJob, $jobEndingYear, $yearsEmployed,
+        $summary, $advice, $pros, $cons,
+        $businessOutlook, $recommendToFriend, $ceoRating,
+        $careerOpportunities, $compensation, $culture,
+        $diversity, $seniorLeadership, $workLifeBalance);
+
+    insertReview($review);
+} else {
+    echo $_POST['query'];
+    $error = "Please fill all the required fields";
+    header("Location: review_employer.php?message=".$error);
+}
+
+
+
+
 function insertReview($review){
     try {
         $open_review_s_db = new PDO("sqlite:validations/open_review_s_sqlite.db");
@@ -25,7 +95,7 @@ function insertReview($review){
                               ratingWorkLifeBalance,
                               summary) 
                 VALUES (
-                        :employerID, datetime('now'),
+                        :employerID, datetime(),
                         :advice,:cons, :employmentStatus, :currentJob,
                         :jobEndingYear,:jobTitle, :yearsEmployed, :pros,
                         :businessOutlook,
@@ -40,14 +110,18 @@ function insertReview($review){
 
     try {
         $stmt = $open_review_s_db->prepare($query);
+        // Required Params
         $stmt->bindParam(':employerID', $review->employerID);
-        $stmt->bindParam(':advice', $review->advice);
-        $stmt->bindParam(':cons', $review->cons);
+        $stmt->bindParam(':overallRating', $review->overallRating, PDO::PARAM_INT);
+        $stmt->bindParam(':jobTitle', $review->jobTitle);
         $stmt->bindParam(':employmentStatus', $review->employmentStatus);
         $stmt->bindParam(':currentJob', $review->currentJob, PDO::PARAM_INT);
         $stmt->bindParam(':jobEndingYear', $review->jobEndingYear, PDO::PARAM_INT);
-        $stmt->bindParam(':jobTitle', $review->jobTitle);
         $stmt->bindParam(':yearsEmployed', $review->yearsEmployed, PDO::PARAM_INT);
+        // Optional Params
+        $stmt->bindParam(':summary', $review->summary);
+        $stmt->bindParam(':advice', $review->advice);
+        $stmt->bindParam(':cons', $review->cons);
         $stmt->bindParam(':pros', $review->pros);
         $stmt->bindParam(':businessOutlook', $review->businessOutlook);
         $stmt->bindParam(':careerOpportunities', $review->careerOpportunities, PDO::PARAM_INT);
@@ -55,68 +129,17 @@ function insertReview($review){
         $stmt->bindParam(':compensation', $review->compensation, PDO::PARAM_INT);
         $stmt->bindParam(':culture', $review->culture, PDO::PARAM_INT);
         $stmt->bindParam(':diversity', $review->diversity, PDO::PARAM_INT);
-        $stmt->bindParam(':overallRating', $review->overallRating, PDO::PARAM_INT);
         $stmt->bindParam(':recommendToFriend', $review->recommendToFriend);
         $stmt->bindParam(':seniorLeadership', $review->seniorLeadership, PDO::PARAM_INT);
         $stmt->bindParam(':workLifeBalance', $review->workLifeBalance, PDO::PARAM_INT);
-        $stmt->bindParam(':summary', $review->summary);
 
         $stmt->execute();
+        header("Location: review_employer.php");
     } catch (PDOException $e) {
         die($e->getMessage());
     }
 }
 
-if (isset($_POST['query'],
-    $_POST['overallRating'],
-    $_POST['jobTitle'],
-    $_POST['employmentStatus'],
-    $_POST['currentJob'],
-    $_POST['yearsEmployed']) &&
-
-    $_POST['overallRating'] != -1 &&
-    ($_POST['jobTitle'] != "" || count($_POST['jobTitle']) >255 || preg_match("/^[a-zA-Z ]*$/", $_POST['jobTitle'])) &&
-    $_POST['employmentStatus'] != -1 &&
-    $_POST['currentJob'] != -1 &&
-    $_POST['yearsEmployed'] != "") {
-
-    $employer = htmlspecialchars($_POST['query']);
-    $employerID = htmlspecialchars($_POST[$employer]);
-    $overallRating = htmlspecialchars($_POST['overallRating']);
-    $jobTitle = htmlspecialchars($_POST['jobTitle']);
-    $employmentStatus = htmlspecialchars($_POST['employmentStatus']);
-    $currentJob = htmlspecialchars($_POST['currentJob']);
-    $jobEndingYear = isset($_POST['jobEndingYear']) ? htmlspecialchars($_POST['jobEndingYear']) : null;
-    $yearsEmployed = htmlspecialchars($_POST['yearsEmployed']);
-    $summary = isset($_POST['summary']) ? htmlspecialchars($_POST['summary']) : "";
-    $advice = isset($_POST['advice']) ? htmlspecialchars($_POST['advice']) : "";
-    $pros = isset($_POST['pros']) ? htmlspecialchars($_POST['pros']) : "";
-    $cons = isset($_POST['cons']) ? htmlspecialchars($_POST['cons']) : "";
-    $businessOutlook = htmlspecialchars($_POST['businessOutlook']);
-    $recommendToFriend = htmlspecialchars($_POST['recommendToFriend']);
-    $ceoRating = htmlspecialchars($_POST['ceoRating']);
-    $careerOpportunities = htmlspecialchars($_POST['careerOpportunities']);
-    $compensation = htmlspecialchars($_POST['compensation']);
-    $culture = htmlspecialchars($_POST['culture']);
-    $diversity = htmlspecialchars($_POST['diversity']);
-    $seniorLeadership = htmlspecialchars($_POST['seniorLeadership']);
-    $workLifeBalance = htmlspecialchars($_POST['workLifeBalance']);
-
-    $review = new Review($employerID, $overallRating, $jobTitle, $employmentStatus,
-        $currentJob, $jobEndingYear, $yearsEmployed,
-        $summary, $advice, $pros, $cons,
-        $businessOutlook, $recommendToFriend, $ceoRating,
-        $careerOpportunities, $compensation, $culture,
-        $diversity, $seniorLeadership, $workLifeBalance);
-    echo 'review object created';
-    insertReview($review);
-    echo 'review added to db';
-
-} else {
-    echo $_POST['query'];
-    $error = "Please fill all the required fields";
-    echo $error;
-}
 
 
 
