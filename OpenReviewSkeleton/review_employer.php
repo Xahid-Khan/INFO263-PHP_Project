@@ -19,7 +19,7 @@
 
     <div class="container">
         <h1>Review Employer</h1>
-        <form action="employer_review_form_submission.php" method="POST">
+        <form onsubmit="return validateReviewForm()" action="employer_review_form_submission.php" method="POST">
             <br>
             <h5 id="error-message" style="display: <?php
             if (!empty($_GET['message'])) {
@@ -39,7 +39,8 @@
             <div class="row">
                 <div class="col-md-8">
                     <label for="employer">Employer *</label>
-                    <input type="text" id="search" name="query" class="form-control" placeholder="e.g. Google">
+                    <input type="text" id="search" name="query" class="form-control" placeholder="e.g. Google"
+                           autocomplete="off" onkeyup="validateEmployerName()">
                     <div class="list-group" id="show-list"
                          style="position: absolute; background: white; padding: 10px;
                          border: 1px solid black; width: 30%; display: none"></div>
@@ -100,22 +101,30 @@
             <div class="row">
                 <div class="col-md-6">
                     <label for="summary">Summary</label>
-                    <textarea class="form-control" id="summary" name="summary" rows="3"></textarea>
+                    <textarea class="form-control" id="summary" name="summary" rows="3"
+                              maxlength="65535"
+                    ></textarea>
                 </div>
                 <div class="col-md-6">
                     <label for="advice">Advice</label>
-                    <textarea class="form-control" id="advice" name="advice" rows="3"></textarea>
+                    <textarea class="form-control" id="advice" name="advice" rows="3"
+                              maxlength="65535"
+                    ></textarea>
                 </div>
             </div>
             <br>
             <div class="row">
                 <div class="col-md-6">
                     <label for="pros">Pros</label>
-                    <textarea class="form-control" id="pros" name="pros" rows="3"></textarea>
+                    <textarea class="form-control" id="pros" name="pros" rows="3"
+                              maxlength="65535"
+                    ></textarea>
                 </div>
                 <div class="col-md-6">
                     <label for="cons">Cons</label>
-                    <textarea class="form-control" id="cons" name="cons" rows="3"></textarea>
+                    <textarea class="form-control" id="cons" name="cons" rows="3"
+                              maxlength="65535"
+                    ></textarea>
                 </div>
             </div>
             <br>
@@ -132,7 +141,7 @@
                     </select>
                 </div>
                 <div class="col-md-4">
-                    <label for="recommendToFriend">Would you recommend this company to a friend?</label> <!--not required-->
+                    <label for="recommendToFriend">Would you recommend to a friend?</label> <!--not required-->
                     <select class="form-control" id="recommendToFriend" name="recommendToFriend">
                         <option value="null">Select...</option>
                         <option value="POSITIVE">Yes</option>

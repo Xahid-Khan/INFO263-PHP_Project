@@ -1,34 +1,44 @@
 "use-strict"
 
-const ALPHAREGEX = /^[a-zA-Z ]*$/;
-const YEARENDREGEX = /^(19|20)\d{2}$/;
-const YEARSEMPLOYEDREGEX = /^(0|[1-9]\d?|100)$/;
+const ALPHAREGEX = /^[a-zA-Z '.-]*$/;
 const currentYear = new Date().getFullYear();
 const EMPSTATUSREGEX = /^(PART_TIME|REGULAR|CONTRACT|FREELANCE|INTERN)$/;
 
 const overallRating = document.getElementById("overallRating");
-const employer = document.getElementById("employer");
+const employer = document.getElementById("search");
 const jobTitle = document.getElementById("jobTitle");
 const employmentStatus = document.getElementById("employmentStatus");
 const currentJob = document.getElementById("currentJob");
 const jobEndingYear = document.getElementById("jobEndingYear");
 const yearsEmployed = document.getElementById("yearsEmployed");
-/* const summary = document.getElementById("summary");
-const advice = document.getElementById("advice");
-const pros = document.getElementById("pros");
-const cons = document.getElementById("cons");
-const businessOutlook = document.getElementById("business-outlook");
-const recommendToFriend = document.getElementById("recommend-to-friend");
-const ceoRating = document.getElementById("ceo-rating");
-const careerOpportunities = document.getElementById("career-opportunities");
-const compensation = document.getElementById("compensation");
-const culture = document.getElementById("culture");
-const diversity = document.getElementById("diversity");
-const seniorLeadership = document.getElementById("senior-leadership");
-const workLifeBalance = document.getElementById("work-life-balance"); */
+const submitButton = document.getElementById("submit");
 
-const validateEmployer = () => {
+const validateReviewForm = () => {
+    if (validateEmployerName() &&
+        validateOverallRating() &&
+        validateJobTitle() &&
+        validateEmploymentStatus() &&
+        validateCurrentJob() &&
+        validateJobEndingYear() &&
+        validateYearsEmployed()
+    ) {
+        console.log("I'm IN");
+        // submitButton.removeAttribute("disabled");
+        return true;
+    }
+    console.log("I'm NOT IN");
+    // submitButton.setAttribute("disabled", "true");
+    window.scrollTo(0, 0);
+    return false;
+}
 
+const validateEmployerName = () => {
+    if (employer.value.length == 0) {
+        employer.style.borderColor = "red";
+        return false;
+    }
+    employer.style.borderColor = "black";
+    return true;
 }
 
 const validateOverallRating = () => {
@@ -41,7 +51,12 @@ const validateOverallRating = () => {
 }
 
 const validateJobTitle = () => {
-    if (jobTitle.value == "" || jobTitle.value.length >255 || !jobTitle.value.match(ALPHAREGEX)) {
+
+    console.log(ALPHAREGEX);
+    console.log(jobTitle.value);
+    console.log(ALPHAREGEX.test(jobTitle.value));
+
+    if (jobTitle.value == "" || jobTitle.value.length >255 || !ALPHAREGEX.exec(jobTitle.value)) {
         document.getElementById("jobTitleLabel").style.color="red";
         return false;
     }
@@ -50,7 +65,7 @@ const validateJobTitle = () => {
 }
 
 const validateEmploymentStatus = () => {
-    if (employmentStatus.value == -1 || (!employmentStatus.value.match(EMPSTATUSREGEX))){
+    if (employmentStatus.value == -1 || !EMPSTATUSREGEX.test(employmentStatus.value)){
         document.getElementById("employmentStatusLabel").style.color="red";
         return false;
     }
@@ -73,7 +88,7 @@ const validateCurrentJob = () => {
     return true;
 }
 const validateJobEndingYear = () => {
-    if (!jobEndingYear.value.match(YEARENDREGEX) || jobEndingYear.value > currentYear || jobEndingYear.value == 0) {
+    if (currentJob.value == 0 && jobEndingYear.value < 0 || jobEndingYear.value > currentYear) {
         document.getElementById("jobEndingYearLabel").style.color="red";
         return false;
     }
@@ -82,7 +97,7 @@ const validateJobEndingYear = () => {
 
 }
 const validateYearsEmployed = () => {
-    if (!yearsEmployed.value.match(YEARSEMPLOYEDREGEX)) {
+    if (!(yearsEmployed.value > 0 && yearsEmployed.value < 100)) {
         document.getElementById("yearsEmployedLabel").style.color="red";
         return false;
     }
