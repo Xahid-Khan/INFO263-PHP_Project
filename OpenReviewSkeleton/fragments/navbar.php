@@ -33,7 +33,7 @@ session_start();
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="navbar-brand" href="employer_rankings.php">
+                    <a class="navbar-brand" href="employer_rankings.php?offset=1">
                         <button class="btn btn-sm btn-outline-light" type="button">Employer Rankings</button>
                     </a>
                 </li>
