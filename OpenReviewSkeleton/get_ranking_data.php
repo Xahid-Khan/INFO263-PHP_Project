@@ -28,24 +28,29 @@ function openConnection ()
     return $open_review_s_db;
 }
 
-function getNumberOfPages ()
+function getNumberOfPages (string $companyName)
 {
     try{
         $db = openConnection();
-        return ceil(($db->query("SELECT COUNT(*) FROM reviewedEmployer_S")->fetch()[0]) / 5);
+        return ceil(($db->query("SELECT COUNT(*) FROM reviewedEmployer_S
+                                                WHERE company_name LIKE '%".$companyName."%'")->fetch()[0]) / 5);
     } catch (Exception $e) {
         die($e->getMessage());
     }
 }
 
-function getPaginatedData (int $index)
+function getPaginatedData (int $index, string $companyName, string $filterOption)
 {
     try {
+        $filterBy = explode("-", $filterOption)[0];
+        $filterOrder = explode("-", $filterOption)[1];
 
         $open_review_s_db = openConnection();
         $offset = $index < 1 ? 0 : ($index - 1) * 5;
 
-        $res = $open_review_s_db->query("SELECT * FROM reviewedEmployer_S ORDER BY company_name DESC limit 5 offset ".$offset);
+        $res = $open_review_s_db->query("SELECT * FROM reviewedEmployer_S
+                                                WHERE company_name LIKE '%".$companyName."%'
+                                                ORDER BY ".$filterBy." ".$filterOrder." limit 5 offset ".$offset);
 
         while ($row = $res->fetch(PDO::FETCH_ASSOC)) {
 
@@ -89,7 +94,7 @@ function getPaginatedData (int $index)
                             </div>
                         </div>
                     </div>
-                        <p class="card-text">' . thousandsCurrencyFormat($row['reviews_count']) . ' Reviews</p>
+                        <p class="card-text">' . thousandsCurrencyFormat($row['reviews_count']) . ' Review(s)</p>
                         <p>
                             <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample' . $row['employer_id'] . '" aria-expanded="false" aria-controls="collapseExample">
                                 More Ratings
@@ -118,9 +123,7 @@ function getPaginatedData (int $index)
                                                 <tr>
                                                     <td>Overall:  </td>
                                                     <td>' . $row['overall_rating'] . '
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
-                                                            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-                                                        </svg>
+                                                        <img src="img/star.svg">
                                                     </td>
         
                                                 </tr>
@@ -128,54 +131,42 @@ function getPaginatedData (int $index)
                                                     <td>Diversity & Inclusion: </td>
                                                     <td>
                                                         ' . $row['diversity_and_inclusion_rating'] . '
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
-                                                            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-                                                        </svg>
+                                                        <img src="img/star.svg">
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td>Work/Life Balance: </td>
                                                     <td>
                                                         ' . $row['work_life_balance_rating'] . '
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
-                                                            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-                                                        </svg>
+                                                        <img src="img/star.svg">
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td>Culture & Values:</td>
                                                     <td>
                                                         ' . $row['culture_and_values_rating'] . '
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
-                                                            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-                                                        </svg>
+                                                        <img src="img/star.svg">
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td>Career Opportunities:</td>
                                                     <td>
                                                         ' . $row['career_opportunities_rating'] . '
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
-                                                            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-                                                        </svg>
+                                                        <img src="img/star.svg">
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td>Compensation and Benefits:</td>
                                                     <td>
                                                         ' . $row['compensation_and_benefits_rating'] . '
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
-                                                            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-                                                        </svg>
+                                                        <img src="img/star.svg">
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td>Senior Leadership:</td>
                                                     <td>
                                                         ' . $row['senior_leadership_rating'] . '
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
-                                                            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-                                                        </svg>
+                                                        <img src="img/star.svg">
                                                     </td>
                                                 </tr>
                                             </tbody>
