@@ -45,7 +45,7 @@ session_start();
                         echo "<a class='navbar-brand' href='login.php?message=Please login to review an employer'>";
                     }
                     ?>
-                    <button class="btn btn-sm btn-outline-light" type="button">Review an Employer</button>
+                    <button class="btn btn-sm btn-outline-light" type="button">Review Employer</button>
                     </a>
                 </li>
             </ul>

@@ -18,7 +18,7 @@
     <?php include "fragments/navbar.php" ?><br>
 
     <div class="container">
-        <h1>Review Employer</h1>
+        <h1 class="text-center">Review Employer</h1>
         <form onsubmit="return validateReviewForm()" action="employer_review_form_submission.php" method="POST">
             <br>
             <h5 id="error-message" style="display: <?php

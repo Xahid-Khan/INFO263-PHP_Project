@@ -11,7 +11,7 @@
     <?php include "fragments/navbar.php" ?><br>
     <div id="content-wrap" action="employer_rankings.php">
         <?php include "get_ranking_data.php";?>
-        <h1 class="text-center">Employer Ratings</h1> <br>
+        <h1 class="text-center">Employer Rankings</h1> <br>
         <div class="col d-flex justify-content-center">
             <div class="card justify-content-center" style="border: none">
                 <div class="card-body" style="">
