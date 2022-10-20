@@ -9,7 +9,10 @@
     <meta charset="UTF-8">
 </head>
 <body>
+<?php
+session_start();
 
+?>
     <!--Got some help from this-->
     <!--https://stackoverflow.com/questions/19733447/bootstrap-navbar-with-left-center-or-right-aligned-items-->
     <nav class="navbar navbar-expand-md navbar-dark bg-dark">
