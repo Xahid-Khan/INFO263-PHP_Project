@@ -86,7 +86,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                            <p class="card-text">'.thousandsCurrencyFormat( $row['reviews_count']) . ' Reviews</p>
+                                            <p class="card-text">'.thousandsCurrencyFormat( $row['reviews_count']) . ' Review(s)</p>
                                             <p>
                                                 <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample'.$row['employer_id'].'" aria-expanded="false" aria-controls="collapseExample">
                                                     More Ratings
@@ -115,9 +115,7 @@
                                                                     <tr>
                                                                         <td>Overall:  </td>
                                                                         <td>' . $row['overall_rating'] . '
-                                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
-                                                                                <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-                                                                            </svg>
+                                                                            <img src="img/star.svg" />
                                                                         </td>
                             
                                                                     </tr>
@@ -125,54 +123,42 @@
                                                                         <td>Diversity & Inclusion: </td>
                                                                         <td>
                                                                             ' . $row['diversity_and_inclusion_rating'] . '
-                                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
-                                                                                <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-                                                                            </svg>
+                                                                            <img src="img/star.svg" />
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
                                                                         <td>Work/Life Balance: </td>
                                                                         <td>
                                                                             ' . $row['work_life_balance_rating'] . '
-                                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
-                                                                                <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-                                                                            </svg>
+                                                                            <img src="img/star.svg" />
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
                                                                         <td>Culture & Values:</td>
                                                                         <td>
                                                                             ' . $row['culture_and_values_rating'] . '
-                                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
-                                                                                <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-                                                                            </svg>
+                                                                            <img src="img/star.svg" />
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
                                                                         <td>Career Opportunities:</td>
                                                                         <td>
                                                                             ' . $row['career_opportunities_rating'] . '
-                                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
-                                                                                <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-                                                                            </svg>
+                                                                            <img src="img/star.svg" />
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
                                                                         <td>Compensation and Benefits:</td>
                                                                         <td>
                                                                             ' . $row['compensation_and_benefits_rating'] . '
-                                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
-                                                                                <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-                                                                            </svg>
+                                                                            <img src="img/star.svg" />
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
                                                                         <td>Senior Leadership:</td>
                                                                         <td>
                                                                             ' . $row['senior_leadership_rating'] . '
-                                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
-                                                                                <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-                                                                            </svg>
+                                                                            <img src="img/star.svg" />
                                                                         </td>
                                                                     </tr>
                                                                 </tbody>
