@@ -7,12 +7,18 @@
     <link rel="stylesheet" href="css/style.css">
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <!-- core CSS of SnackbarJS, find it in /dist -->
+    <link href="js/snackbarjs/snackbar/dist/snackbar.min.css" rel="stylesheet">
+    <!-- the default theme of SnackbarJS, find it in /themes-css -->
+    <link href="js/snackbarjs/snackbar/themes-css/material.css" rel="stylesheet">
 </head>
 
 <body>
-
     <!--Navigation bar-->
     <?php include "fragments/navbar.php" ?><br><br>
+    <span data-toggle=snackbar
+          data-style="toast"
+    style="display: none"></span>
 
         <?php include "get_ranking_data.php";?>
         <?php
@@ -44,8 +50,6 @@
             }
             return $title . $dash . ' Former Employee';
         }
-
-
 
         try {
             $open_review_s_db = new PDO("sqlite:validations/open_review_s_sqlite.db");
@@ -314,22 +318,30 @@
                                     </div>
                                 </div><br>';
                 }
-
             }
         } catch (PDOException $e) {
             die($e->getMessage());
         }
         ?>
     <br><br><br>
-<footer class="bg-dark text-center text-lg-start" >
-    <!-- Copyright -->
-    <div class="text-center p-3 text-light">
-        © 2022 Copyright:
-        <a class="text-light" href="index.php">rater.com</a>
-    </div>
-    <!-- Copyright -->
-</footer>
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+    <footer class="bg-dark text-center text-lg-start" >
+        <!-- Copyright -->
+        <div class="text-center p-3 text-light">
+            © 2022 Copyright:
+            <a class="text-light" href="index.php">rater.com</a>
+        </div>
+        <!-- Copyright -->
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="js/snackbarjs/snackbar/src/snackbar.js"></script>
+    <?php if($_GET['reviewed'] == "successful"): ?>
+        <script>
+            $(function() {
+                $.snackbar({content: "Thank you for Reviewing our company.", timeout: 5000});
+            });
+        </script>
+    <?php endif; ?>
 </body>

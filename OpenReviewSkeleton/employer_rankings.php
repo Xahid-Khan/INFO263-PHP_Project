@@ -1,5 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="img/search-heart.svg"/>
+</head>
 <body>
 <div id="page-container" style="min-height: 100vh">
     <?php

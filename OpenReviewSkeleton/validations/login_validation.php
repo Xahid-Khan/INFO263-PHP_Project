@@ -32,6 +32,7 @@ function attemptLogin($email, $password): bool {
             session_start();
             $_SESSION['loggedIn'] = $user[true];
             $_SESSION['firstName'] = $user['first_name'];
+            $_SESSION['start'] = time();
             $_SESSION['expire'] = $_SESSION['start'] + (60 * 60);
             header("Location:../index.php");
         } else {

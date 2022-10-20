@@ -134,7 +134,7 @@ function insertReview($review){
         $stmt->bindParam(':workLifeBalance', $review->workLifeBalance, PDO::PARAM_INT);
 
         $stmt->execute();
-        header("Location: review_employer.php");
+        header("Location: individual_employer_reviews.php?company_id=".$review->employerID."&reviewed=successful");
     } catch (PDOException $e) {
         die($e->getMessage());
     }

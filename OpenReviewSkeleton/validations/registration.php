@@ -1,7 +1,6 @@
 <?php
 if (isset($_POST['firstName'], $_POST["lastName"], $_POST["email"],
     $_POST["password"], $_POST["matchPassword"])) {
-//    header("location:http://index.php");
     registerUser(htmlentities($_POST['firstName']), htmlentities($_POST['lastName']),
         htmlentities($_POST['email']), htmlentities($_POST['password']),
         htmlentities($_POST['matchPassword']));
@@ -43,6 +42,7 @@ function registerUser($firstName, $lastName, $email, $password, $re_password)
         session_start();
         $_SESSION['loggedIn'] = true;
         $_SESSION['firstName'] = $firstName;
+        $_SESSION['start'] = time();
         $_SESSION['expire'] = $_SESSION['start'] + (60 * 60);
         header("Location: ../index.php");
     } catch (PDOException $e) {

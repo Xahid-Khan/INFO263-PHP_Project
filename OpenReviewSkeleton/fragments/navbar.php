@@ -11,7 +11,9 @@
 <body>
 <?php
 session_start();
-
+if (isset($_SESSION['loggedIn']) && $_SESSION['expire'] - time() <= 0) {
+    session_destroy();
+}
 ?>
     <!--Got some help from this-->
     <!--https://stackoverflow.com/questions/19733447/bootstrap-navbar-with-left-center-or-right-aligned-items-->
