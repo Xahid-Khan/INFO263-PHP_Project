@@ -97,7 +97,7 @@ const validateJobEndingYear = () => {
 
 }
 const validateYearsEmployed = () => {
-    if (!(yearsEmployed.value > 0 && yearsEmployed.value < 100)) {
+    if (!(yearsEmployed.value >= 0 && yearsEmployed.value < 100)) {
         document.getElementById("yearsEmployedLabel").style.color="red";
         return false;
     }
