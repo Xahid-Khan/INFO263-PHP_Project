@@ -202,7 +202,7 @@
                                                      
                                                      <div class="col-12 pt-1">
                                                             <h6> Summary: </h6>
-                                                            <p class="border col-12 p-2">
+                                                            <p class="border col-12 p-2 overflow-auto" style="height: 100px">
                                                                 ' . $row['summary'] . '
                                                             </p>
                                                      </div>
@@ -222,7 +222,7 @@
                                                      </div>
                                                      <div class="col-12 pt-3">
                                                             <h6> Advice: </h6>
-                                                            <p class="border col-12 p-2">
+                                                            <p class="border col-12 p-2 overflow-auto" style="height: 100px">
                                                                 ' . $row['advice'] . '
                                                             </p>
                                                      </div>
