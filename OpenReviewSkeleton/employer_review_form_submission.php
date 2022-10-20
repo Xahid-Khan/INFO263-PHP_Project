@@ -25,6 +25,7 @@ if (isset($_POST['query'],
     $currentJob = htmlspecialchars($_POST['currentJob']);
     $jobEndingYear = isset($_POST['jobEndingYear']) ? htmlspecialchars($_POST['jobEndingYear']) : null;
     $yearsEmployed = htmlspecialchars($_POST['yearsEmployed']);
+    // $yearsEmployed = (int)$yearsEmployed;
 
 //    Optional Parameters
     $summary = isset($_POST['summary']) && strlen($_POST['summary']) > 0 && strlen($_POST['summary']) < 255 ?
