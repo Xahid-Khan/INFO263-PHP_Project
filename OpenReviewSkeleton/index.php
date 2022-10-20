@@ -13,7 +13,7 @@
 </head>
 <body>
 
-    <div id="page-container">
+    <div id="page-container" style="min-height: 100vh">
         <!--Navigation bar-->
         <?php include "fragments/navbar.php" ?>
         <div id="content-wrap">
