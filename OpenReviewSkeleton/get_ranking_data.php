@@ -42,8 +42,8 @@ function getNumberOfPages (string $companyName)
 function getPaginatedData (int $index, string $companyName, string $filterOption)
 {
     try {
-        $filterBy = explode("-", $filterOption)[0];
-        $filterOrder = explode("-", $filterOption)[1];
+        $filterBy = explode("-", $filterOption)[0] ?? "company_name";
+        $filterOrder = explode("-", $filterOption)[1] ?? "DESC";
 
         $open_review_s_db = openConnection();
         $offset = $index < 1 ? 0 : ($index - 1) * 5;
@@ -52,8 +52,9 @@ function getPaginatedData (int $index, string $companyName, string $filterOption
                                                 WHERE company_name LIKE '%".$companyName."%'
                                                 ORDER BY ".$filterBy." ".$filterOrder." limit 5 offset ".$offset);
 
+        $hasData = false;
         while ($row = $res->fetch(PDO::FETCH_ASSOC)) {
-
+            $hasData = true;
             echo '
             <div class="col d-flex justify-content-center">
                 <div class="card justify-content-center" style="width: 60%;">
@@ -180,6 +181,9 @@ function getPaginatedData (int $index, string $companyName, string $filterOption
                 </div>
             </div><br>
         ';
+        }
+        if (!$hasData) {
+            echo "<hr/><h1 style='text-align: center'>NO RECORDS FOUND</h1>";
         }
     } catch (PDOException $e) {
         die($e->getMessage());
