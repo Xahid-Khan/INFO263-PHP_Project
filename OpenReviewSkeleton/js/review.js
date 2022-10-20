@@ -37,7 +37,7 @@ const validateEmployerName = () => {
         employer.style.borderColor = "red";
         return false;
     }
-    employer.style.borderColor = "black";
+    employer.style.borderColor = "#dbdadd";
     return true;
 }
 
