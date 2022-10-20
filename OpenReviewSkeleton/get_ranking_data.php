@@ -98,8 +98,13 @@ function getPaginatedData (int $index, string $companyName, string $filterOption
                         <p class="card-text">' . thousandsCurrencyFormat($row['reviews_count']) . ' Review(s)</p>
                         <p>
                             <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample' . $row['employer_id'] . '" aria-expanded="false" aria-controls="collapseExample">
-                                More Ratings
+                                Detailed Summary
                             </button>
+                           
+                            
+                            <a class="btn btn-secondary" type="button" href="individual_employer_reviews.php?company_id='.$row['employer_id'].'">
+                                View All Reviews
+                            </a>
                         </p>
                         <div class="collapse" id="collapseExample' . $row['employer_id'] . '">
                             <div class="card card-body">
