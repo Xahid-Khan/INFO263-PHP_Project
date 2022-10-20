@@ -26,8 +26,8 @@
                         About Us
                     </h5>
                     Rater is a website for rating, reviewing and learning about employers.
-                    Weather you have a job, looking for a job or even just curious about a company ,
-                    this is a great website to look into which employer peaks your interest and learn
+                    Whether you have a job, are looking for a job or just curious about a company,
+                    Rater is a great website to look into which employer peaks your interest and learn
                     from former and current employees.
                 </div>
             </div><br><br><br><br>
