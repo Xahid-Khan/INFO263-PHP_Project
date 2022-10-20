@@ -236,7 +236,7 @@
                     <div class="text-end">
                         <button id="submit" name="submit" type="submit" class="btn btn-primary">Submit Review</button>
                     </div>
-                </div>
+                </div><br><br><br>
             </div>
         </form>
     </div>
