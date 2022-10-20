@@ -35,7 +35,7 @@
                                         <option value="overall_rating-ASC" <?php if($filterOption == "overall_rating-ASC") echo "selected"?>
                                         >Rating ASC</option>
                                         <option value="reviews_count-DESC" <?php if($filterOption == "reviews_count-DESC") echo "selected"?>
-                                        >Total Reviews ASC</option>
+                                        >Total Reviews DESC</option>
                                         <option value="reviews_count-ASC" <?php if($filterOption == "reviews_count-ASC") echo "selected"?>
                                         >Total Reviews ASC</option>
                                     </select>
