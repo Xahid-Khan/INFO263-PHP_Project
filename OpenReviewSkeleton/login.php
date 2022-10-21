@@ -9,6 +9,7 @@
 </head>
 <body>
 <!--Navigation bar-->
+<div id="page-container" style="min-height: 100vh">
 <?php include "fragments/navbar.php" ?><br>
 
 <?php
@@ -19,6 +20,7 @@ if(isset($_SESSION['user_id'])){
 ?>
 
 <!--Login Form -->
+    <div id="content-wrap">
 <div class="login-body">
     <div class="registration-card">
         <div style="width: 100%; justify-content: center; display: flex;">
@@ -82,7 +84,9 @@ if(isset($_SESSION['user_id'])){
         </div>
     </div>
 </div>
-<?php include "fragments/footer.php" ?><br>
+<?php include "fragments/footer.php" ?><br><br><br>
+</div>
+</div>
 </body>
 <script src="js/login_user.js"></script>
 </html>
