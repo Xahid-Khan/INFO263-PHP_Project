@@ -80,40 +80,13 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['expire'] - time() <= 0) {
                     </label>
                 </li>
                 <li>
-<!--                    <a data-toggle="modal" data-target="#exampleModal">-->
-                    <a href="profile.php">
+                    <a href="<? if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']) echo 'profile.php'; else echo 'login.php'; ?>">
                         <img src="https://humanimals.co.nz/wp-content/uploads/2019/11/blank-profile-picture-973460_640.png"
                              width="50px" height="50px" style="border-radius: 15px; margin-right: 10px; cursor: pointer"
                         />
                     </a>
                 </li>
             </ul>
-            <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <label class="btn btn-primary">
-                                Choose File
-                                <input id="user-image" name="user_image" type="file" style="display: none"
-                                       onchange="showPreview()"
-                                />
-                            </label>
-                            <img id="image-preview" src="" height="100px" width="100px" alt="Choose Photo">
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </nav>
 
