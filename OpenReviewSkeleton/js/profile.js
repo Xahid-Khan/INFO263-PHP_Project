@@ -1,10 +1,9 @@
 "use-strict"
 
-const first_name = document.getElementById('first-name');
-const last_name = document.getElementById('last-name');
-const edit_button = document.getElementById('edit-button');
-
 const editFields = () => {
+    const first_name = document.getElementById('first-name');
+    const last_name = document.getElementById('last-name');
+    const edit_button = document.getElementById('edit-button');
     first_name.removeAttribute('disabled');
     last_name.removeAttribute('disabled');
     edit_button.setAttribute('disabled', 'true');

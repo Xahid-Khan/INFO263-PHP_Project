@@ -25,18 +25,34 @@
             throw new PDOException($e->getMessage(), (int)$e->getCode());
         }
 
-        if ($_FILES) {
-            $target_dir = "img/users/";
-            $name = explode(".", $_FILES['user_image']['name']);
-            $extension=end($name);
-            $newName = $data['email'] .".". $extension;
+        if (isset($_POST['update_button'])) {
+            try {
+                $pdo = new PDO("sqlite:validations/open_review_s_sqlite.db");
+                $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                $newName = "";
+                if ($_FILES && $_FILES['user_image']['name']) {
+                    $target_dir = "img/users/";
+                    $name = explode(".", $_FILES['user_image']['name']);
+                    $extension = end($name);
+                    $newName = $data['email'] . "." . $extension;
+                    move_uploaded_file($_FILES['user_image']['tmp_name'], $target_dir . $newName);
+                    $_SESSION['image'] = $newName;
+                }
 
-            $pdo = new PDO("sqlite:validations/open_review_s_sqlite.db");
-            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $pdo->query("UPDATE user SET image = '$newName' WHERE user.user_id = '$userId'")->fetch();
-            $pdo = null;
-            move_uploaded_file($_FILES['user_image']['tmp_name'], $target_dir . $newName);
-            $_SESSION['image'] = $newName;
+                $newFistName = $_POST['firstName'] ?? $data['first_name'];
+                $newLastName = $_POST['lastName'] ?? $data['last_name'];
+
+                $pdo->query("UPDATE user SET image = '$newName', first_name = '$newFistName', last_name = '$newLastName'
+                WHERE user.user_id = '$userId'");
+
+                $data = $pdo->query("SELECT * FROM user WHERE user.user_id = '$userId'")->fetch();
+
+                $_SESSION['firstName'] = $data['first_name'];
+
+                header("Refresh:0");
+            } catch (Exception $e) {
+                $e->getMessage();
+            }
         }
         ?>
 
@@ -64,6 +80,24 @@
                                 </label>
                             </td>
                         </tr>
+                        <tr>
+                            <td>
+                                <h5 id="error-message" class="form-error" style="display: <?php
+                                if (!empty($_GET['message'])) {
+                                    echo 'flex';
+                                } else {
+                                    echo 'none';
+                                }
+                                ?>">
+                                    <?php
+                                    if (!empty($_GET['message'])) {
+                                        $error = $_GET['message'];
+                                        echo $error;
+                                    }
+                                    ?>
+                                </h5>
+                            </td>
+                        </tr>
                         <tr class="registration-row">
                             <td style="margin: 20px; width: 50vh">
                                 <input id="first-name" class="form-control form-control-lg" type="text" maxlength="20"
@@ -80,9 +114,9 @@
                         </tr>
                         <tr class="registration-row">
                             <td style="margin: 20px; width: 50vh">
-                                <input id="user-email" class="form-control form-control-lg" type="email" maxlength="20"
-                                       minlength="1" name="email" required disabled value="<?php echo $data['email'] ?>"
-                                       onchange="validateEmail()">
+                                <input id="user-email" class="form-control form-control-lg" type="email"
+                                       required disabled value="<?php echo $data['email'] ?>"
+                                >
                             </td>
                         </tr>
                     </table>
@@ -93,7 +127,7 @@
                         </button>
                     </div>
                     <div style="width: 100%; padding: 20px 0 20px 0; display: flex; justify-content: center;">
-                        <button id="update-button" type="submit" class="btn btn-primary" style="width: 100%; text-align-last: center"
+                        <button id="update-button" name="update_button" type="submit" class="btn btn-primary" style="width: 100%; text-align-last: center"
                         >Update
                         </button>
                     </div>
