@@ -83,7 +83,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['expire'] - time() <= 0) {
                     <a href="<? if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']) echo 'profile.php'; else echo 'login.php'; ?>">
                         <img src="img/users/<?php echo $_SESSION['image']?>"
                              width="50px" height="50px" style="border-radius: 15px; margin-right: 10px; cursor: pointer" id="user-profile-image"
-                             onerror="reloadImage()"
+                             onerror="reloadUserImage()"
                         />
                     </a>
                 </li>

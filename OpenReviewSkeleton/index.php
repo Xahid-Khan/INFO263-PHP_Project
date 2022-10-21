@@ -34,6 +34,6 @@
         </div>
         <?php include "fragments/footer.php" ?>
     </div>
-
+<script src="js/profile.js"></script>
 </body>
 </html>

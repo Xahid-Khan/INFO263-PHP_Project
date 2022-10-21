@@ -9,7 +9,7 @@ const editFields = () => {
     edit_button.setAttribute('disabled', 'true');
 }
 
-const reloadImage = () => {
+const reloadUserImage = () => {
     const defaultImage = "https://humanimals.co.nz/wp-content/uploads/2019/11/blank-profile-picture-973460_640.png";
     const image = document.getElementById("user-profile-image")
     image.onerror = null;

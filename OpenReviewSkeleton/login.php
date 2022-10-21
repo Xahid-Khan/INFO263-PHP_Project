@@ -89,4 +89,5 @@ if(isset($_SESSION['user_id'])){
 </div>
 </body>
 <script src="js/login_user.js"></script>
+<script src="js/profile.js"></script>
 </html>
