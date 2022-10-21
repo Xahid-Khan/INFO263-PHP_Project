@@ -337,7 +337,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 
     <script src="js/snackbarjs/snackbar/src/snackbar.js"></script>
-    <?php if($_GET['reviewed'] == "successful"): ?>
+    <?php
+    $reviewed = isset($_GET['reviewed']);
+    if($reviewed && $_GET['reviewed'] == "successful"): ?>
         <script>
             $(function() {
                 $.snackbar({content: "Thank you for Reviewing our company.", timeout: 5000});
