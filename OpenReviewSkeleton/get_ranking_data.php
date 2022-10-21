@@ -103,7 +103,7 @@ function getPaginatedData (int $index, string $companyName, string $filterOption
                            
                             
                             <a class="btn btn-secondary" type="button" href="individual_employer_reviews.php?company_id='.$row['employer_id'].'">
-                                View All Reviews
+                                View Reviews
                             </a>
                         </p>
                         <div class="collapse" id="collapseExample' . $row['employer_id'] . '">
