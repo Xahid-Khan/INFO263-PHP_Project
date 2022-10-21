@@ -52,6 +52,7 @@
                             <td style="margin: 20px; width: 50vh; display: flex; justify-content: center">
                                 <img src="img/users/<?php echo $_SESSION['image']?>"
                                      width="300" height="300" style="border-radius: 15px; margin-right: 10px; cursor: pointer" id="user-profile-image"
+                                     onerror="reloadImage()"
                                 />
                             </td>
                         </tr>

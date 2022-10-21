@@ -81,14 +81,15 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['expire'] - time() <= 0) {
                 </li>
                 <li>
                     <a href="<? if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']) echo 'profile.php'; else echo 'login.php'; ?>">
-                        <img src="https://humanimals.co.nz/wp-content/uploads/2019/11/blank-profile-picture-973460_640.png"
-                             width="50px" height="50px" style="border-radius: 15px; margin-right: 10px; cursor: pointer"
+                        <img src="img/users/<?php echo $_SESSION['image']?>"
+                             width="50px" height="50px" style="border-radius: 15px; margin-right: 10px; cursor: pointer" id="user-profile-image"
+                             onerror="reloadImage()"
                         />
                     </a>
                 </li>
             </ul>
         </div>
     </nav>
-
+<script src="js/profile.js"></script>
 </body>
 </html>
