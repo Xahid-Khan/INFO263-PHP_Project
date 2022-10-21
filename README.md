@@ -3,7 +3,7 @@ Run locally:
 1. Download ampps: https://ampps.com/ (take note of installation path)
 2. Extract project archive in ampps/www
 3. Run Ampps and click on the Globe button or Open via localhost using Ampps port
-4. Navigate to index.php by clicking on "INFO263-Assignment" -> "OpenReviewSkeleton"
+4. Navigate to the homepage by clicking on "INFO263-Assignment" -> "OpenReviewSkeleton"
 
 If this doesn't work:
 
