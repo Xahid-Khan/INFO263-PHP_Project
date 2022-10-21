@@ -8,8 +8,10 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+<div id="page-container" style="min-height: 100vh">
 <!--Navigation bar-->
 <?php include "fragments/navbar.php" ?><br>
+    <div id="content-wrap">
 
 <!--Registration Form -->
 <div class="registration-body">
@@ -135,9 +137,11 @@
             </div>
         </div>
     </div>
-</div>
+</div><br><br><br><br>
+    </div>
 
 <?php include "fragments/footer.php" ?>
+</div>
 </body>
 <script src="js/register_user.js"></script>
 <script src="js/profile.js"></script>
