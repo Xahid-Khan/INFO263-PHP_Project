@@ -46,12 +46,13 @@
 
                 $pdo->query("UPDATE user SET image = '$newName', first_name = '$newFistName', last_name = '$newLastName'
                 WHERE user.user_id = '$userId'");
-
                 $data = $pdo->query("SELECT * FROM user WHERE user.user_id = '$userId'")->fetch();
-
                 $_SESSION['firstName'] = $data['first_name'];
 
-                header("Refresh:0");
+                echo '<script>
+                    window.location.href = "profile.php";
+                    </script>';
+
             } catch (Exception $e) {
                 $e->getMessage();
             }
@@ -63,7 +64,7 @@
                 <div>
                     <h1>Profile Page</h1>
                 </div>
-                <form style="text-align-last: left; height: fit-content; margin-bottom: 50px;"
+                <form style="text-align-last: left; height: fit-content; margin-bottom: 50px;" id="profile_form"
                       action="profile.php" method="post" enctype="multipart/form-data">
                     <table class="registration-table">
                         <tr class="registration-row">
