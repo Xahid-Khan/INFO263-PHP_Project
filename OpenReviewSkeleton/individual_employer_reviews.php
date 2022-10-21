@@ -25,8 +25,11 @@
         $company_id = $_GET['company_id'];
         function checkRating($num): string
         {
-            if(is_int($num)) {
-                return 100 * $num . ' %';
+            if($num == "APPROVE" || $num == "POSITIVE") {
+                return '<img src="img/tick.svg" />';
+            }
+            if($num == "NEGATIVE" || $num == "DISAPPROVE") {
+                return '<img src="img/negative.svg" />';
             }
             return '<img src="img/dash.svg" />';
         }
