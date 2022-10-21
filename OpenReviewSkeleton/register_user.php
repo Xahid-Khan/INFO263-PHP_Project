@@ -8,20 +8,21 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+<div id="page-container" style="min-height: 100vh">
 <!--Navigation bar-->
 <?php include "fragments/navbar.php" ?><br>
-
+    <div id="content-wrap">
 <!--Registration Form -->
 <div class="registration-body">
     <div class="registration-card">
         <div style="width: 100%; display: flex; justify-content: center;">
-            <div class="card-block" style="display: grid; justify-content: center; text-align-last: center;">
+            <div class="card-block-login">
                 <div>
                     <h1>Welcome to RATER</h1>
                     <p>Where you can rate any employer and leave reviews</p>
                     <h1>Registration Form</h1>
                 </div>
-                <form style="text-align-last: left; height: 400px; margin-bottom: 50px;"
+                <form style="text-align-last: left; margin-bottom: 50px;"
                       onsubmit="return validateForm()" action="validations/registration.php" method="post">
                     <table class="registration-table">
                         <tr>
@@ -78,7 +79,7 @@
                             </td>
                         </tr>
                     </table>
-                    <div style="float: right; width: 100%; padding: 12px 0 0 0;">
+                    <div style="display: flex; justify-content: center;width: 100%; padding: 12px 0 0 0;">
                         <button id="registration-button" type="submit" class="btn btn-primary" style="width: 50vh; text-align-last: center"
                         >REGISTER
                         </button>
@@ -94,9 +95,11 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div><br><br><br><br>
 </div>
 <?php include "fragments/footer.php" ?>
+    </div>
+</div>
 </body>
 <script src="js/register_user.js"></script>
 

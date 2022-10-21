@@ -31,17 +31,23 @@ function registerUser($firstName, $lastName, $email, $password, $re_password)
         $hashPassword = password_hash($password, PASSWORD_DEFAULT);
         $pdo = openConnection();
         $data = $pdo->query("SELECT * from user WHERE user.email LIKE '$email'");
-        print_r($data);
+
         if ($data->fetch()) {
             $error = "This email is already in use";
             header("Location: ../register_user.php?message=$error");
         }
 
-        $pdo->query(sprintf("INSERT INTO user (FIRST_NAME, LAST_NAME, EMAIL, PASSWORD)
-                                VALUES ('%s', '%s', '%s', '%s')", $firstName, $lastName, $email, $hashPassword));
+        $pdo->query(sprintf("INSERT INTO user (FIRST_NAME, LAST_NAME, EMAIL, PASSWORD, IMAGE)
+                                VALUES ('%s', '%s', '%s', '%s', '%s')", $firstName, $lastName, $email, $hashPassword, ""));
+
+        $user = $pdo->query("SELECT * FROM user WHERE user.email LIKE '$email'")->fetch();
+
         session_start();
         $_SESSION['loggedIn'] = true;
         $_SESSION['firstName'] = $firstName;
+        $_SESSION['userId'] = $user['user_id'];
+        $_SESSION['email'] = $user['email'];
+        $_SESSION['image'] = $user['image'];
         $_SESSION['start'] = time();
         $_SESSION['expire'] = $_SESSION['start'] + (60 * 60);
         header("Location: ../index.php");

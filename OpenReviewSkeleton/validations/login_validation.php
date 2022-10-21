@@ -28,10 +28,14 @@ function attemptLogin($email, $password): bool {
         $pdo = openConnection();
         $data = $pdo->query("SELECT * FROM user WHERE user.email LIKE '$email'");
         $user = $data->fetch();
+        $pdo = null;
         if ($user && password_verify($password, $user['password'])) {
             session_start();
             $_SESSION['loggedIn'] = $user[true];
             $_SESSION['firstName'] = $user['first_name'];
+            $_SESSION['userId'] = $user['user_id'];
+            $_SESSION['email'] = $user['email'];
+            $_SESSION['image'] = $user['image'];
             $_SESSION['start'] = time();
             $_SESSION['expire'] = $_SESSION['start'] + (60 * 60);
             header("Location:../index.php");
