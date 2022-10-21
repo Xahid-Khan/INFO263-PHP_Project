@@ -35,6 +35,5 @@
         <?php include "fragments/footer.php" ?>
     </div>
 
-
 </body>
 </html>

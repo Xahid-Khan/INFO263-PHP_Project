@@ -79,7 +79,7 @@
                             </td>
                         </tr>
                     </table>
-                    <div style="float: right; width: 100%; padding: 12px 0 0 0;">
+                    <div style="display: flex; justify-content: center;width: 100%; padding: 12px 0 0 0;">
                         <button id="registration-button" type="submit" class="btn btn-primary" style="width: 50vh; text-align-last: center"
                         >REGISTER
                         </button>
