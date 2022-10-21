@@ -124,7 +124,7 @@
                     </table>
                     <div style="width: 100%; padding: 60px 0 0px 0; display: flex; justify-content: center;">
                         <button id="edit-button" type="button" class="btn btn-primary" style="width: 100%;
-                        text-align-last: center" onclick="editFields()"
+                        text-align-last: center" onclick="editUpdateFields()"
                         >Edit
                         </button>
                     </div>
